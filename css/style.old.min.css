@@ -1,0 +1,256 @@
+.container {
+  margin: auto;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col, [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.brand-major-color {
+  color: #659ebc;
+}
+
+.white-color {
+  color: #ffffff;
+}
+
+.title-main {
+  font-family: Oswald;
+  font-weight: 600;
+}
+
+.base-heavy {
+  font-family: Roboto;
+  font-weight: 600;
+}
+
+html {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body {
+  color: #ffffff;
+}
+
+html h2, html h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+@media (min-width: 320px) {
+  .container {
+    max-width: 100%;
+  }
+  .container h1 {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%;
+    margin: 0 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 750px;
+  }
+  .container h1 {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1360px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+
+.navbar {
+  background-color: #3c414d;
+  z-index: 999;
+}
+
+@media (min-width: 0) {
+  .navbar:not(.collapsed) {
+    align-content: flex-start;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar {
+    align-content: center;
+  }
+}
+
+.navbar .navbar-toggler {
+  border-color: #3c414d;
+  height: 32px;
+  width: 32px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  transition: 300ms ease;
+}
+
+.navbar .navbar-toggler:not(.collapsed) {
+  background-image: url("../img/close-hamburger-menu.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: 300ms ease;
+}
+
+.navbar a.navbar-brand {
+  display: inline-block;
+  margin: 0;
+}
+
+.navbar a.navbar-brand .container {
+  padding: 0;
+}
+
+.navbar a.navbar-brand span {
+  font-family: 'Oswald', sans-serif;
+}
+
+.navbar a.navbar-brand span.paspartoo-brand {
+  font-size: 7px;
+  display: block;
+  color: #ffffff;
+}
+
+.navbar .navbar-right .call_button {
+  color: #ffffff;
+}
+
+@media (min-width: 320px) {
+  .navbar .navbar-right .call_button:before {
+    content: "\f098";
+    font-family: FontAwesome;
+    font-size: xx-large;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar .navbar-right .call_button:before {
+    content: " ";
+  }
+}
+
+@media (min-width: 1360px) {
+  .navbar .navbar-right .call_button:before {
+    content: "Call Now: ";
+    font-size: medium;
+  }
+}
+
+.navbar .navbar-right .call_button a {
+  color: #ffffff;
+}
+
+.navbar .navbar-right .form_modal_button {
+  color: #ffffff;
+  background-color: #eb9411;
+  padding: 0.25rem;
+  margin-left: 0.25rem;
+  border-radius: 7px;
+  align-self: center;
+  font-family: Oswald, sans-serif;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .navbar .navbar-right .form_modal_button {
+    margin-left: 2rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+.navbar .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (min-width: 0) {
+  .navbar .navbar-nav {
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar .navbar-nav {
+    padding-left: 0px;
+  }
+}
+
+.navbar .dropdown-menu {
+  transition: 300ms ease;
+}
+
+@media (min-width: 0) {
+  .navbar .dropdown-menu {
+    color: #ffffff;
+    background-color: #3c414d;
+    width: 90%;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar .dropdown-menu {
+    background-color: #d6e8f1;
+  }
+}
+
+@media (min-width: 0) {
+  .navbar .dropdown-item {
+    color: #ffffff;
+    background-color: #3c414d;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar .dropdown-item {
+    color: #3c414d;
+    background-color: #d6e8f1;
+  }
+  .navbar .dropdown-item:active {
+    color: #eb9411;
+  }
+}
+
+.navbar .overlay {
+  background-color: #000;
+  opacity: 0.8;
+  z-index: -777;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.old.min.css.map */

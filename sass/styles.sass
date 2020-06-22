@@ -1,0 +1,247 @@
+@import "vars"
+@import "reset"
+
+@mixin media_min($_min_width)
+  @media (min-width: $_min_width)
+    @content
+
+@mixin title($_font_weight: 400, $_font_size: 1.6rem)
+  font-family: Oswald
+  font-weight: $_font_weight
+  font-size: $_font_size
+
+@mixin base($_font_weight: 400, $_font_size: 1.6rem)
+  font-family: Roboto
+  font-weight: $_font_weight
+  font-size: $_font_size
+
+
+// theme colors
+.brand-major-color
+  color: $brand-major
+.white-color
+  color: $white
+
+// all elements
+html
+  font-size: 10px
+
+body
+  color: $white
+  font-family: 'Roboto', sans-serif
+h2, h3
+  font-family: 'Oswald', sans-serif
+
+.container // container max width
+  margin: auto
+  @include media_min($_min_width: $nokia) // 320 px
+    max-width: 100vw
+    padding: 0px
+    h1
+      font-size: 4.2rem
+    h2
+      font-size: 3.6rem
+    h3
+      font-size: 2.4rem
+    h4
+      font-size: 2.1rem
+    h5
+      font-size: 1.6rem
+    h6
+      font-size: 1.6rem
+    p
+      font-size: 1.6rem
+  @include media_min($_min_width: $phone) // 576px
+    max-width: calc(100% - 2*15px)
+  @include media_min($_min_width: $tablet) // 768 px
+    max-width: 750px
+    h1
+      font-size: 4.8rem
+    h3
+      font-size: 2.8rem
+    h4
+      font-size: 2.4rem
+    h6
+      font-size: 1.8rem
+  @include media_min($_min_width: $notebook) // 992 px
+    max-width: 960px
+    h1
+      font-size: 6.4rem
+  @include media_min($_min_width: $desktop) // 1200 px
+    max-width: 1140px
+    h6
+      font-size: 2.1rem
+  @include media_min($_min_width: $projector) // 1360 px
+    max-width: 100% //1300px
+
+.navbar-brand
+  @include title(400, 2.8rem)
+  margin-left: 3rem
+  width: 11rem ///??????? pos rel fix ?
+  &__wrap
+    display: flex
+    flex-wrap: wrap
+    &__go
+      color: $brand-major
+    &__vegan
+      color: $white
+    &__paspartoo
+      color: $white
+      font-size: 0.9rem
+      flex-basis: 100%
+
+.navbar-row
+  display: flex
+  align-content: center
+  height: 11rem
+  background-color: $brand-minor
+  text-decoration: none
+  .navbar-left
+    .top-navigation-menu
+      list-style: none
+      display: flex
+      @include title(500, 2.1rem)
+      letter-spacing: 0.05em
+      margin: 0
+      padding: 0
+      li
+        padding-left: 2rem
+        .nav-link
+          color: $white
+          text-decoration: none
+          text-transform: uppercase
+      .dropdown 
+        position: relative
+      .dropdown-menu // natural foods dropdown
+        position: absolute
+        left: 3rem
+        top: 5rem
+        border-radius: 0
+        padding: 2rem 0.75rem 
+        transition: 300ms ease
+        @include media_min($_min_width: 0) // mobile: white on brand minor
+          color: $white
+          background-color: $brand-minor
+        @include media_min($_min_width: $notebook) // notebook+: brand minor on brand-light
+          background-color: $brand-light
+        .dropdown-item // inside dropdown
+          width: 100%
+          line-height: 200%
+          @include title()
+          @include media_min($_min_width: 0)// mobile: white on brand minor
+            color: $white
+            background-color: $brand-minor
+          @include media_min($_min_width: $notebook)
+            color: $brand-minor
+            background-color: $brand-light // notebook+: brand minor on brand-light
+            &:active  // notebook::active+: brand orange on brand-light
+              color: $brand-orange
+  .navbar-right
+    display: flex
+    align-items: center
+    padding: 0
+    text-decoration: none
+    &__form_button
+      background-color: $brand-orange
+      @include title(500, 2.1rem)
+      letter-spacing: -0.02em
+      text-transform: uppercase
+      padding: 1.4rem 4rem
+      border-radius: 5px
+      margin-right: 3rem
+    .top_nav_call_button
+      color: $white
+      margin-right: 4rem
+      @include title(400, 2.1rem)
+      text-align: right
+      letter-spacing: 0.1rem
+      &::before
+        content: "Call Now: "
+.footer-bar
+  height: 35rem
+  background-color: $brand-minor
+  .footer-main
+    padding-top: 7.4rem
+    max-width: 1300px
+    margin: auto
+    padding-bottom: 5rem
+    border-bottom: 1px solid #ffffff
+    &__brand
+      .navbar-brand
+        margin-left: 0
+    .footer-navigation-menu
+      text-decoration: none
+      &__element
+        list-style: none
+        &:first-child::before
+          content: "Main menu"
+          display: block
+          padding-bottom: 1.4rem
+          color: $brand-light
+          text-transform: uppercase
+          @include title(400, 2.4rem)
+        a
+          text-decoration: none
+      &__link
+        color: $brand-light
+        text-transform: uppercase
+        @include title(400, 2.1rem)
+        display: flex
+        flex-direction: column
+    &__callbutton
+      display: flex
+      flex-direction: column
+    .footer_call_button
+      @include title(500, 2.8rem)
+      color: $brand-orange
+      line-height: 41px
+      letter-spacing: 0.05em
+      text-transform: uppercase
+      &::before
+        content: "Call us:"
+        text-transform: uppercase
+        display: block
+        padding-bottom: 1.4rem
+        color: $brand-light
+        @include title(400, 2.4rem)
+    .footer-main__subscribe
+      margin-top: 4.1rem
+      &__text
+        color: $brand-light
+        @include title(400, 1.4rem)
+        margin-bottom: 1.8rem
+      &__email
+        color: #D6E8F1
+        @include base(400, 1.6rem)
+        width: 30rem
+        margin-bottom: 1.2rem
+      &__button
+        border-radius: 2px
+        width: 30rem
+        text-transform: uppercase
+        @include title()
+        color: $white
+        background-color: $brand-orange
+        border: 0
+        padding: 1rem 10rem
+  .copyright-bar
+    max-width: 1300px
+    margin: auto
+    padding-top: 2.2rem
+    .copyright
+      @include base(400, 1.4rem)
+      color: $brand-light
+    .educational-project
+      @include base(400, 1.4rem)
+      color: $brand-light
+    .footer-paspartoo-href
+      color: $brand-orange
+      text-decoration: none
+hr
+  display: block
+  height: 1px
+  border: 0
+  border-top: 1px solid #ccc
+  margin: 1em 0
+  padding: 0
+      

@@ -1,5 +1,7 @@
 .container {
   margin: auto;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .row {
@@ -39,81 +41,83 @@ h2, h3 {
 
 .container {
   margin: auto;
+  max-width: 100%;
 }
 
 @media (min-width: 320px) {
-  .container {
+  .vegan-container {
+    margin: auto;
     max-width: 100vw;
     padding: 0px;
   }
-  .container h1 {
+  h1 {
     font-size: 4.2rem;
   }
-  .container h2 {
+  h2 {
     font-size: 3.6rem;
   }
-  .container h3 {
+  h3 {
     font-size: 2.4rem;
   }
-  .container h4 {
+  h4 {
     font-size: 2.1rem;
   }
-  .container h5 {
+  h5 {
     font-size: 1.6rem;
   }
-  .container h6 {
+  h6 {
     font-size: 1.6rem;
   }
-  .container p {
+  p {
     font-size: 1.6rem;
   }
 }
 
 @media (min-width: 576px) {
-  .container {
+  .vegan-container {
     max-width: calc(100% - 2*15px);
   }
 }
 
 @media (min-width: 768px) {
-  .container {
+  .vegan-container {
     max-width: 750px;
   }
-  .container h1 {
+  h1 {
     font-size: 4.8rem;
   }
-  .container h3 {
+  h3 {
     font-size: 2.8rem;
   }
-  .container h4 {
+  h4 {
     font-size: 2.4rem;
   }
-  .container h6 {
+  h6 {
     font-size: 1.8rem;
   }
 }
 
 @media (min-width: 992px) {
-  .container {
+  .vegan-container {
     max-width: 960px;
   }
-  .container h1 {
+  h1 {
     font-size: 6.4rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .container {
+  .vegan-container {
     max-width: 1140px;
   }
-  .container h6 {
+  h6 {
     font-size: 2.1rem;
   }
 }
 
 @media (min-width: 1360px) {
-  .container {
-    max-width: 100%;
+  .vegan-container {
+    max-width: 1300px;
   }
 }
 
@@ -161,6 +165,10 @@ h2, h3 {
   letter-spacing: 0.05em;
   margin: 0;
   padding: 0;
+}
+
+.navbar-row .navbar-left .top-navigation-menu .dropdown {
+  margin-left: 11rem;
 }
 
 .navbar-row .navbar-left .top-navigation-menu li {
@@ -253,8 +261,10 @@ h2, h3 {
   letter-spacing: 0.1rem;
 }
 
-.navbar-row .navbar-right .top_nav_call_button::before {
-  content: "Call Now: ";
+@media (min-width: 1360px) {
+  .navbar-row .navbar-right .top_nav_call_button::before {
+    content: "Call Now: ";
+  }
 }
 
 .footer-bar {
@@ -264,7 +274,6 @@ h2, h3 {
 
 .footer-bar .footer-main {
   padding-top: 7.4rem;
-  max-width: 1300px;
   margin: auto;
   padding-bottom: 5rem;
   border-bottom: 1px solid #ffffff;
@@ -399,5 +408,25 @@ hr {
   border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0;
+}
+
+#front_carousel .carousel-inner .carousel-item .carousel-caption {
+  height: 95%;
+  font-family: Oswald;
+  font-weight: 500;
+  font-size: 6.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#front_carousel .carousel-control-prev .carousel-control-prev-icon {
+  align-self: end;
+  margin-bottom: 4.3rem;
+}
+
+#front_carousel .carousel-control-next .carousel-control-next-icon {
+  align-self: end;
+  margin-bottom: 4.3rem;
 }
 /*# sourceMappingURL=styles.min.css.map */

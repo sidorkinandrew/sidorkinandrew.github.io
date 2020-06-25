@@ -410,23 +410,42 @@ hr {
   padding: 0;
 }
 
+#front_carousel {
+  margin: auto;
+  height: 100%;
+}
+
+#front_carousel .carousel-indicators li {
+  border-radius: 1rem;
+  height: 0.6rem;
+}
+
+#front_carousel .carousel-inner .carousel-item {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+}
+
 #front_carousel .carousel-inner .carousel-item .carousel-caption {
-  height: 95%;
+  height: 67%;
   font-family: Oswald;
   font-weight: 500;
   font-size: 6.4rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
-#front_carousel .carousel-control-prev .carousel-control-prev-icon {
-  align-self: end;
-  margin-bottom: 4.3rem;
+#front_carousel .carousel-inner .carousel-item .carousel-caption h1 {
+  margin-bottom: 2rem;
 }
 
-#front_carousel .carousel-control-next .carousel-control-next-icon {
-  align-self: end;
+#front_carousel .carousel-inner .carousel-item .carousel-caption h4 {
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+}
+
+#front_carousel .carousel-control-prev, #front_carousel .carousel-control-next {
+  align-items: flex-end;
   margin-bottom: 4.3rem;
 }
 /*# sourceMappingURL=styles.min.css.map */

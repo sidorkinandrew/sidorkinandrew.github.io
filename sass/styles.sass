@@ -255,19 +255,25 @@ hr
   margin: 1em 0
   padding: 0
 #front_carousel
+  margin: auto
+  height: 100%
+  .carousel-indicators
+    li
+      border-radius: 1rem
+      height: 0.6rem
   .carousel-inner
     .carousel-item
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
       .carousel-caption
-        height: 95%
+        height: 67%
         @include title(500, 6.4rem)
         display: flex
-        align-items: center
-        justify-content: center
-  .carousel-control-prev
-    .carousel-control-prev-icon
-      align-self: end
-      margin-bottom: 4.3rem
-  .carousel-control-next
-    .carousel-control-next-icon
-      align-self: end
-      margin-bottom: 4.3rem
+        flex-direction: column
+        h1
+          margin-bottom: 2rem
+        h4
+          @include base(500, 2.4rem)
+          line-height: 2.8rem
+  .carousel-control-prev, .carousel-control-next //align-self: end
+    align-items: flex-end
+    margin-bottom: 4.3rem

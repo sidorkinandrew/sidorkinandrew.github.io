@@ -413,6 +413,7 @@ hr {
 #front_carousel {
   margin: auto;
   height: 100%;
+  margin-bottom: 10rem;
 }
 
 #front_carousel .carousel-indicators li {
@@ -447,5 +448,23 @@ hr {
 #front_carousel .carousel-control-prev, #front_carousel .carousel-control-next {
   align-items: flex-end;
   margin-bottom: 4.3rem;
+}
+
+.cards-header {
+  text-transform: uppercase;
+  color: #18171C;
+  background-color: #ffffff;
+  font-family: Oswald;
+  font-weight: 500;
+  font-size: 3.6rem;
+  margin-bottom: 4.3rem;
+}
+
+.card-groups .card .card-img-overlay-hover {
+  display: none;
+}
+
+.card-groups .card:hover .card-img-overlay {
+  display: none;
 }
 /*# sourceMappingURL=styles.min.css.map */

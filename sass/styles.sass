@@ -257,6 +257,7 @@ hr
 #front_carousel
   margin: auto
   height: 100%
+  margin-bottom: 10rem
   .carousel-indicators
     li
       border-radius: 1rem
@@ -277,3 +278,16 @@ hr
   .carousel-control-prev, .carousel-control-next //align-self: end
     align-items: flex-end
     margin-bottom: 4.3rem
+.cards-header
+  text-transform: uppercase
+  color: #18171C
+  background-color: #ffffff
+  @include title(500, 3.6rem)
+  margin-bottom: 4.3rem
+.card-groups
+  .card
+    .card-img-overlay-hover
+      display: none
+    &:hover
+      .card-img-overlay
+        display: none

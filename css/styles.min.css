@@ -460,11 +460,57 @@ hr {
   margin-bottom: 4.3rem;
 }
 
+.card-groups .card {
+  flex-basis: 31%;
+  margin: 1.4rem;
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card-groups .card .card-title {
+  flex-basis: 100%;
+}
+
+.card-groups .card .card-img-overlay {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
 .card-groups .card .card-img-overlay-hover {
+  background-color: #000000;
+  border-radius: 10px;
+  height: 100%;
   display: none;
 }
 
-.card-groups .card:hover .card-img-overlay {
+.card-groups .card:hover .card-img-overlay-hover {
+  position: absolute;
+  display: inline;
+  color: #d6e8f1;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-groups .card:hover .card-img-overlay-hover__text {
+  position: relative;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-top: 10rem;
+  line-height: 140%;
+}
+
+.card-groups .card:hover .card-title {
+  display: inline-flex;
+  height: 95%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  z-index: +1;
+}
+
+.card-groups .card:hover .card-text-price {
   display: none;
 }
 /*# sourceMappingURL=styles.min.css.map */

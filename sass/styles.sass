@@ -286,8 +286,39 @@ hr
   margin-bottom: 4.3rem
 .card-groups
   .card
+    flex-basis: 31%
+    margin: 1.4rem
+    position: relative
+    width: 100%
+    border-radius: 10px
+    .card-title
+      flex-basis: 100%
+    .card-img-overlay
+      display: flex
+      flex-wrap: wrap
+      align-content: flex-end
     .card-img-overlay-hover
+      background-color: #000000
+      border-radius: 10px      
+      height: 100%
       display: none
     &:hover
-      .card-img-overlay
+      .card-img-overlay-hover
+        position: absolute
+        display: inline
+        color: $brand-light
+        padding: 2rem
+        background-color: rgba(0,0,0,0.5)
+        &__text
+          position: relative
+          @include base(500, 1.6rem)
+          margin-top: 10rem
+          line-height: 140%
+      .card-title // position: absolute //margin-top: 3rem
+        display: inline-flex
+        height: 95%
+        padding-left: 1rem
+        padding-right: 1rem
+        z-index: +1
+      .card-text-price
         display: none

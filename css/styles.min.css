@@ -342,8 +342,16 @@ h2, h3 {
   font-size: 2.4rem;
 }
 
-.footer-bar .footer-main .footer-main__subscribe {
-  margin-top: 4.1rem;
+@media (min-width: 1200px) {
+  .footer-bar .footer-main .footer-main__subscribe {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1360px) {
+  .footer-bar .footer-main .footer-main__subscribe {
+    margin-top: 4.1rem;
+  }
 }
 
 .footer-bar .footer-main .footer-main__subscribe__text {
@@ -607,6 +615,22 @@ hr {
 
 .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card {
   margin-right: 2rem;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
+  align-content: flex-end;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay .card-title {
+  font-family: Oswald;
+  font-weight: 400;
+  font-size: 2.4rem;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay .card-text-date {
+  align-self: flex-start;
 }
 
 .lifestyle-container #lifestyle_carousel .carousel-control-prev-icon,

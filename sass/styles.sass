@@ -215,7 +215,10 @@ h2, h3
         color: $brand-light
         @include title(400, 2.4rem)
     .footer-main__subscribe
-      margin-top: 4.1rem
+      @include media_min($_min_width: $desktop)
+        margin-top: 0
+      @include media_min($_min_width: $projector)
+        margin-top: 4.1rem
       &__text
         color: $brand-light
         @include title(400, 1.4rem)
@@ -378,6 +381,14 @@ hr
         align-items: flex-start
         .card
           margin-right: 2rem
+          .card-img-overlay
+            align-content: flex-end
+            flex-wrap: wrap
+            display: flex
+            .card-title
+              @include title($_font_weight: 400, $_font_size: 2.4rem)
+            .card-text-date
+              align-self: flex-start
     .carousel-control-prev-icon,
     .carousel-control-next-icon,
     .carousel-indicators

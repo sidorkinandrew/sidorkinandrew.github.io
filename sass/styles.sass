@@ -220,6 +220,15 @@ h2, h3
         color: $brand-light
         @include title(400, 1.4rem)
         margin-bottom: 1.8rem
+        flex-basis: 100%
+        &::before
+          @include media_min($_min_width: $desktop)
+            content: "Subscribe to our news"
+            text-transform: uppercase
+            display: block
+            @include title(400, 2.4rem)
+          @include media_min($_min_width: $projector)
+            content: " "
       &__email
         color: #D6E8F1
         @include base(400, 1.6rem)
@@ -230,10 +239,14 @@ h2, h3
         width: 30rem
         text-transform: uppercase
         @include title()
-        color: $white
-        background-color: $brand-orange
         border: 0
         padding: 1rem 10rem
+        @include media_min($_min_width: $desktop)
+          color: $brand-orange
+          background-color: black
+        @include media_min($_min_width: $projector)
+          color: $white
+          background-color: $brand-orange
   .copyright-bar
     max-width: 1300px
     margin: auto
@@ -278,47 +291,112 @@ hr
   .carousel-control-prev, .carousel-control-next //align-self: end
     align-items: flex-end
     margin-bottom: 4.3rem
-.cards-header
-  text-transform: uppercase
-  color: #18171C
-  background-color: #ffffff
-  @include title(500, 3.6rem)
-  margin-bottom: 4.3rem
-.card-groups
-  .card
-    flex-basis: 31%
-    margin: 1.4rem
+.card-container
+  display: flex
+  &__header
+    text-transform: uppercase
+    color: #18171C
+    background-color: #ffffff
+    @include title(500, 3.6rem)
+    margin-bottom: 4.3rem
+  .button__load_more
+    margin: auto
+    @include base(400, 1.6rem)
+    border: 1px solid #659EBC
+    box-sizing: border-box
+    border-radius: 2px
+    text-align: center
+    text-transform: uppercase
+    background-color: $white
+    color: #659EBC
+    padding: 1rem 6rem
+    margin-top: 5rem
+    margin-bottom: 7rem
+  .card-groups
+    .card
+      flex-basis: calc(33.3333% - 2.8rem)
+      max-width: calc(33.3333% - 2.8rem)
+      margin: 1.4rem
+      position: relative
+      width: 100%
+      border-radius: 10px
+      .card-title
+        flex-basis: 100%
+      .card-img-overlay
+        display: flex
+        flex-wrap: wrap
+        align-content: flex-end
+      .card-img-overlay-hover
+        background-color: #000000
+        border-radius: 10px      
+        height: 100%
+        display: none
+      &:hover
+        .card-img-overlay-hover
+          position: absolute
+          display: inline
+          color: $brand-light
+          padding: 2rem
+          background-color: rgba(0,0,0,0.5)
+          &__text
+            position: relative
+            @include base(500, 1.6rem)
+            margin-top: 10rem
+            line-height: 140%
+        .card-title // position: absolute //margin-top: 3rem
+          display: inline-flex
+          height: 95%
+          padding-left: 1rem
+          padding-right: 1rem
+          z-index: +1
+        .card-text-price
+          display: none
+.lifestyle-container
+  background-color: #F5F5F5
+  display: flex
+  &__header
+    text-transform: uppercase
+    color: #18171C
+    @include title(500, 3.6rem) 
+    margin-bottom: 3.7rem
+    margin-top: 6.7rem
+    margin-left: 3.4rem
+    flex-basis: 100%
+  #lifestyle_carousel
+    margin: auto
     position: relative
     width: 100%
-    border-radius: 10px
-    .card-title
-      flex-basis: 100%
-    .card-img-overlay
+    margin-bottom: 15.2rem
+    padding-left: 2rem
+    .carousel-inner .carousel-item.active,
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev
       display: flex
-      flex-wrap: wrap
-      align-content: flex-end
-    .card-img-overlay-hover
-      background-color: #000000
-      border-radius: 10px      
-      height: 100%
-      display: none
-    &:hover
-      .card-img-overlay-hover
-        position: absolute
-        display: inline
-        color: $brand-light
-        padding: 2rem
-        background-color: rgba(0,0,0,0.5)
-        &__text
-          position: relative
-          @include base(500, 1.6rem)
-          margin-top: 10rem
-          line-height: 140%
-      .card-title // position: absolute //margin-top: 3rem
-        display: inline-flex
-        height: 95%
-        padding-left: 1rem
-        padding-right: 1rem
-        z-index: +1
-      .card-text-price
-        display: none
+    .carousel-inner
+      display: flex
+      .carousel-item
+        align-items: flex-start
+        .card
+          margin-right: 2rem
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon,
+    .carousel-indicators
+      filter: invert(50%)
+    .lifestyle-carousel-controls
+      display: flex
+      margin-top: 7rem
+      justify-content: space-between
+      .carousel-control-prev,
+      .carousel-control-next
+        position: relative
+        top: -2.5rem
+      .carousel-control-prev
+        padding-right: 10rem
+      .carousel-control-next
+        padding-left: 10rem
+      .carousel-indicators
+        display: flex
+        li
+          border-radius: 1rem
+          height: 0.8rem
+          width: 3%

@@ -352,6 +352,24 @@ h2, h3 {
   font-weight: 400;
   font-size: 1.4rem;
   margin-bottom: 1.8rem;
+  flex-basis: 100%;
+}
+
+@media (min-width: 1200px) {
+  .footer-bar .footer-main .footer-main__subscribe__text::before {
+    content: "Subscribe to our news";
+    text-transform: uppercase;
+    display: block;
+    font-family: Oswald;
+    font-weight: 400;
+    font-size: 2.4rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  .footer-bar .footer-main .footer-main__subscribe__text::before {
+    content: " ";
+  }
 }
 
 .footer-bar .footer-main .footer-main__subscribe__email {
@@ -370,10 +388,22 @@ h2, h3 {
   font-family: Oswald;
   font-weight: 400;
   font-size: 1.6rem;
-  color: #ffffff;
-  background-color: #eb9411;
   border: 0;
   padding: 1rem 10rem;
+}
+
+@media (min-width: 1200px) {
+  .footer-bar .footer-main .footer-main__subscribe__button {
+    color: #eb9411;
+    background-color: black;
+  }
+}
+
+@media (min-width: 1360px) {
+  .footer-bar .footer-main .footer-main__subscribe__button {
+    color: #ffffff;
+    background-color: #eb9411;
+  }
 }
 
 .footer-bar .copyright-bar {
@@ -450,7 +480,11 @@ hr {
   margin-bottom: 4.3rem;
 }
 
-.cards-header {
+.card-container {
+  display: flex;
+}
+
+.card-container__header {
   text-transform: uppercase;
   color: #18171C;
   background-color: #ffffff;
@@ -460,32 +494,50 @@ hr {
   margin-bottom: 4.3rem;
 }
 
-.card-groups .card {
-  flex-basis: 31%;
+.card-container .button__load_more {
+  margin: auto;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 1.6rem;
+  border: 1px solid #659EBC;
+  box-sizing: border-box;
+  border-radius: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #ffffff;
+  color: #659EBC;
+  padding: 1rem 6rem;
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+}
+
+.card-container .card-groups .card {
+  flex-basis: calc(33.3333% - 2.8rem);
+  max-width: calc(33.3333% - 2.8rem);
   margin: 1.4rem;
   position: relative;
   width: 100%;
   border-radius: 10px;
 }
 
-.card-groups .card .card-title {
+.card-container .card-groups .card .card-title {
   flex-basis: 100%;
 }
 
-.card-groups .card .card-img-overlay {
+.card-container .card-groups .card .card-img-overlay {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-end;
 }
 
-.card-groups .card .card-img-overlay-hover {
+.card-container .card-groups .card .card-img-overlay-hover {
   background-color: #000000;
   border-radius: 10px;
   height: 100%;
   display: none;
 }
 
-.card-groups .card:hover .card-img-overlay-hover {
+.card-container .card-groups .card:hover .card-img-overlay-hover {
   position: absolute;
   display: inline;
   color: #d6e8f1;
@@ -493,7 +545,7 @@ hr {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.card-groups .card:hover .card-img-overlay-hover__text {
+.card-container .card-groups .card:hover .card-img-overlay-hover__text {
   position: relative;
   font-family: Roboto;
   font-weight: 500;
@@ -502,7 +554,7 @@ hr {
   line-height: 140%;
 }
 
-.card-groups .card:hover .card-title {
+.card-container .card-groups .card:hover .card-title {
   display: inline-flex;
   height: 95%;
   padding-left: 1rem;
@@ -510,7 +562,86 @@ hr {
   z-index: +1;
 }
 
-.card-groups .card:hover .card-text-price {
+.card-container .card-groups .card:hover .card-text-price {
   display: none;
+}
+
+.lifestyle-container {
+  background-color: #F5F5F5;
+  display: flex;
+}
+
+.lifestyle-container__header {
+  text-transform: uppercase;
+  color: #18171C;
+  font-family: Oswald;
+  font-weight: 500;
+  font-size: 3.6rem;
+  margin-bottom: 3.7rem;
+  margin-top: 6.7rem;
+  margin-left: 3.4rem;
+  flex-basis: 100%;
+}
+
+.lifestyle-container #lifestyle_carousel {
+  margin: auto;
+  position: relative;
+  width: 100%;
+  margin-bottom: 15.2rem;
+  padding-left: 2rem;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item.active,
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item-next,
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner {
+  display: flex;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item {
+  align-items: flex-start;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card {
+  margin-right: 2rem;
+}
+
+.lifestyle-container #lifestyle_carousel .carousel-control-prev-icon,
+.lifestyle-container #lifestyle_carousel .carousel-control-next-icon,
+.lifestyle-container #lifestyle_carousel .carousel-indicators {
+  filter: invert(50%);
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls {
+  display: flex;
+  margin-top: 7rem;
+  justify-content: space-between;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-prev,
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-next {
+  position: relative;
+  top: -2.5rem;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-prev {
+  padding-right: 10rem;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-next {
+  padding-left: 10rem;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-indicators {
+  display: flex;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-indicators li {
+  border-radius: 1rem;
+  height: 0.8rem;
+  width: 3%;
 }
 /*# sourceMappingURL=styles.min.css.map */

@@ -19,4 +19,20 @@ $(document).ready(function () {
         $('.overlay').hide();
         $("button.navbar-toggler[data-target='#nav_topbar']").click();
     });
+    // lifestyle slider
+    $('#lifestyle_carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+        next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+        
+        for (var i=0;i<2;i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+              }
+            next.children(':first-child').clone().appendTo($(this));
+          }
+    });
 });

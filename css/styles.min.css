@@ -528,14 +528,13 @@ hr {
   border-radius: 10px;
 }
 
-.card-container .card-groups .card .card-title {
-  flex-basis: 100%;
+.card-container .card-groups .card .card-img-overlay {
+  top: 60%;
 }
 
-.card-container .card-groups .card .card-img-overlay {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-end;
+.card-container .card-groups .card .card-text-price {
+  position: absolute;
+  bottom: 2rem;
 }
 
 .card-container .card-groups .card .card-img-overlay-hover {
@@ -543,6 +542,10 @@ hr {
   border-radius: 10px;
   height: 100%;
   display: none;
+}
+
+.card-container .card-groups .card:hover .card-img-overlay {
+  top: 0;
 }
 
 .card-container .card-groups .card:hover .card-img-overlay-hover {
@@ -563,10 +566,9 @@ hr {
 }
 
 .card-container .card-groups .card:hover .card-title {
-  display: inline-flex;
-  height: 95%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  position: absolute;
+  margin-top: 1rem;
+  padding: 1rem;
   z-index: +1;
 }
 

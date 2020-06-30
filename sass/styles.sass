@@ -323,18 +323,19 @@ hr
       position: relative
       width: 100%
       border-radius: 10px
-      .card-title
-        flex-basis: 100%
       .card-img-overlay
-        display: flex
-        flex-wrap: wrap
-        align-content: flex-end
+        top: 60%
+      .card-text-price
+        position: absolute
+        bottom: 2rem
       .card-img-overlay-hover
         background-color: #000000
         border-radius: 10px      
         height: 100%
         display: none
       &:hover
+        .card-img-overlay
+          top: 0
         .card-img-overlay-hover
           position: absolute
           display: inline
@@ -346,11 +347,10 @@ hr
             @include base(500, 1.6rem)
             margin-top: 10rem
             line-height: 140%
-        .card-title // position: absolute //margin-top: 3rem
-          display: inline-flex
-          height: 95%
-          padding-left: 1rem
-          padding-right: 1rem
+        .card-title
+          position: absolute
+          margin-top: 1rem
+          padding: 1rem
           z-index: +1
         .card-text-price
           display: none

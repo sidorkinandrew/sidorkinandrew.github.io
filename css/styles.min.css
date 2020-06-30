@@ -127,6 +127,7 @@ h2, h3 {
   font-size: 2.8rem;
   margin-left: 3rem;
   width: 11rem;
+  transform: scale(1.5);
 }
 
 .navbar-brand__wrap {
@@ -537,7 +538,18 @@ hr {
 
 .card-container .card-groups .card .card-text-price {
   position: absolute;
-  bottom: 2rem;
+}
+
+@media (min-width: 1200px) {
+  .card-container .card-groups .card .card-text-price {
+    bottom: 1rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  .card-container .card-groups .card .card-text-price {
+    bottom: 2rem;
+  }
 }
 
 .card-container .card-groups .card .card-img-overlay-hover {
@@ -555,8 +567,19 @@ hr {
   position: absolute;
   display: inline;
   color: #d6e8f1;
-  padding: 2rem;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 1200px) {
+  .card-container .card-groups .card:hover .card-img-overlay-hover {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  .card-container .card-groups .card:hover .card-img-overlay-hover {
+    padding: 2rem;
+  }
 }
 
 .card-container .card-groups .card:hover .card-img-overlay-hover__text {
@@ -570,9 +593,21 @@ hr {
 
 .card-container .card-groups .card:hover .card-title {
   position: absolute;
-  margin-top: 1rem;
-  padding: 1rem;
   z-index: +1;
+}
+
+@media (min-width: 1200px) {
+  .card-container .card-groups .card:hover .card-title {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1360px) {
+  .card-container .card-groups .card:hover .card-title {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
 }
 
 .card-container .card-groups .card:hover .card-text-price {
@@ -626,6 +661,9 @@ hr {
   align-content: flex-end;
   flex-wrap: wrap;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  top: 50%;
 }
 
 .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay .card-title {
@@ -636,6 +674,9 @@ hr {
 
 .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay .card-text-date {
   align-self: flex-start;
+  font-family: HelveticaNeueCyr;
+  font-size: 14px;
+  line-height: 14px;
 }
 
 .lifestyle-container #lifestyle_carousel .carousel-control-prev-icon,

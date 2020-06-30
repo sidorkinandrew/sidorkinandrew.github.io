@@ -230,6 +230,9 @@ h2, h3 {
   .navbar-row .navbar-left .top-navigation-menu .dropdown-menu .dropdown-item:active {
     color: #eb9411;
   }
+  .navbar-row .navbar-left .top-navigation-menu .dropdown-menu .dropdown-item:hover {
+    color: #eb9411;
+  }
 }
 
 .navbar-row .navbar-right {

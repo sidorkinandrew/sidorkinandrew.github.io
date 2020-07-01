@@ -526,19 +526,22 @@ hr {
 
 .card-container .button__load_more {
   margin: auto;
-  font-family: Roboto;
-  font-weight: 400;
-  font-size: 1.6rem;
   border: 1px solid #659EBC;
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center;
-  text-transform: uppercase;
-  background-color: #ffffff;
-  color: #659EBC;
   padding: 1rem 6rem;
   margin-top: 5rem;
   margin-bottom: 7rem;
+  background-color: #ffffff;
+}
+
+.card-container .button__load_more a {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: #659EBC;
 }
 
 .card-container .card-groups .card {
@@ -727,6 +730,12 @@ hr {
 .lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-next {
   position: relative;
   top: -2.5rem;
+}
+
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-prev-icon,
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-next-icon {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-control-prev {

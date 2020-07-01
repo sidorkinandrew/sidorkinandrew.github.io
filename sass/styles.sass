@@ -315,17 +315,18 @@ hr
     margin-bottom: 4.3rem
   .button__load_more
     margin: auto
-    @include base(400, 1.6rem)
     border: 1px solid #659EBC
     box-sizing: border-box
     border-radius: 2px
     text-align: center
-    text-transform: uppercase
-    background-color: $white
-    color: #659EBC
     padding: 1rem 6rem
     margin-top: 5rem
     margin-bottom: 7rem
+    background-color: $white
+    a
+      @include base(400, 1.6rem)
+      text-transform: uppercase
+      color: #659EBC
   .card-groups
     .card
       flex-basis: calc(33.3333% - 2.8rem)
@@ -432,6 +433,10 @@ hr
       .carousel-control-next
         position: relative
         top: -2.5rem
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon
+        width: 2.5rem
+        height: 2.5rem
       .carousel-control-prev
         padding-right: 10rem
       .carousel-control-next

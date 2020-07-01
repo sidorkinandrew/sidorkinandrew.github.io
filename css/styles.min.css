@@ -35,7 +35,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-h2, h3 {
+body a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+body a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+body h2, body h3 {
   font-family: 'Oswald', sans-serif;
 }
 
@@ -122,15 +132,14 @@ h2, h3 {
 }
 
 .navbar-brand {
-  font-family: Oswald;
-  font-weight: 400;
-  font-size: 2.8rem;
-  margin-left: 3rem;
-  width: 11rem;
-  transform: scale(1.5);
+  position: relative;
+  top: -1rem;
 }
 
 .navbar-brand__wrap {
+  font-family: Oswald;
+  font-weight: 400;
+  font-size: 3.8rem;
   display: flex;
   flex-wrap: wrap;
 }
@@ -144,9 +153,10 @@ h2, h3 {
 }
 
 .navbar-brand__wrap__paspartoo {
+  position: absolute;
+  bottom: -0.5rem;
   color: #ffffff;
-  font-size: 0.9rem;
-  flex-basis: 100%;
+  font-size: calc(35%);
 }
 
 .navbar-row {
@@ -155,6 +165,10 @@ h2, h3 {
   height: 11rem;
   background-color: #3c414d;
   text-decoration: none;
+}
+
+.navbar-row .navbar-brand {
+  margin-left: 3rem;
 }
 
 .navbar-row .navbar-left .top-navigation-menu {
@@ -304,10 +318,6 @@ h2, h3 {
   font-family: Oswald;
   font-weight: 400;
   font-size: 2.4rem;
-}
-
-.footer-bar .footer-main .footer-navigation-menu__element a {
-  text-decoration: none;
 }
 
 .footer-bar .footer-main .footer-navigation-menu__link {
@@ -649,12 +659,9 @@ hr {
   display: flex;
 }
 
-.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item {
-  align-items: flex-start;
-}
-
-.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card {
+.lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .lifestyle-container_link {
   margin-right: 2rem;
+  width: 100%;
 }
 
 .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
@@ -679,13 +686,8 @@ hr {
   line-height: 14px;
 }
 
-.lifestyle-container #lifestyle_carousel .carousel-control-prev-icon,
-.lifestyle-container #lifestyle_carousel .carousel-control-next-icon,
-.lifestyle-container #lifestyle_carousel .carousel-indicators {
-  filter: invert(50%);
-}
-
 .lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls {
+  filter: invert(50%);
   display: flex;
   margin-top: 7rem;
   justify-content: space-between;
@@ -705,11 +707,7 @@ hr {
   padding-left: 10rem;
 }
 
-.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-indicators {
-  display: flex;
-}
-
-.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls .carousel-indicators li {
+.lifestyle-container #lifestyle_carousel .lifestyle-carousel-controls li {
   border-radius: 1rem;
   height: 0.8rem;
   width: 3%;

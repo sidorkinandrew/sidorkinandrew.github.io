@@ -121,7 +121,10 @@ body
       margin: 0
       padding: 0
       .dropdown
-        margin-left: 11rem
+        @include media_min($_min_width: $desktop)
+          margin-left: 0
+        @include media_min($_min_width: $projector)
+          margin-left: 11rem
       li
         padding-left: 2rem
         .nav-link
@@ -359,7 +362,10 @@ hr
           &__text
             position: relative
             @include base(500, 1.6rem)
-            margin-top: 10rem
+            @include media_min($desktop)
+              margin-top: 9rem
+            @include media_min($projector)
+              margin-top: 10rem
             line-height: 140%
         .card-title
           position: absolute
@@ -406,7 +412,10 @@ hr
             display: flex
             justify-content: space-between
             flex-direction: column
-            top: 50%
+            @include media_min($desktop)
+              top: 55%
+            @include media_min($projector)
+              top: 60%
             .card-title
               @include title($_font_weight: 400, $_font_size: 2.4rem)
             .card-text-date

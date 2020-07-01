@@ -182,8 +182,16 @@ body h2, body h3 {
   padding: 0;
 }
 
-.navbar-row .navbar-left .top-navigation-menu .dropdown {
-  margin-left: 11rem;
+@media (min-width: 1200px) {
+  .navbar-row .navbar-left .top-navigation-menu .dropdown {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1360px) {
+  .navbar-row .navbar-left .top-navigation-menu .dropdown {
+    margin-left: 11rem;
+  }
 }
 
 .navbar-row .navbar-left .top-navigation-menu li {
@@ -597,8 +605,19 @@ hr {
   font-family: Roboto;
   font-weight: 500;
   font-size: 1.6rem;
-  margin-top: 10rem;
   line-height: 140%;
+}
+
+@media (min-width: 1200px) {
+  .card-container .card-groups .card:hover .card-img-overlay-hover__text {
+    margin-top: 9rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  .card-container .card-groups .card:hover .card-img-overlay-hover__text {
+    margin-top: 10rem;
+  }
 }
 
 .card-container .card-groups .card:hover .card-title {
@@ -670,7 +689,18 @@ hr {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  top: 50%;
+}
+
+@media (min-width: 1200px) {
+  .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
+    top: 55%;
+  }
+}
+
+@media (min-width: 1360px) {
+  .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
+    top: 60%;
+  }
 }
 
 .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay .card-title {

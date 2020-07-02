@@ -323,9 +323,13 @@
                     </div>
                     <div class="col-auto footer-main__subscribe">
                         <div class="footer-main__subscribe__text">Subscribe to our news and promotions!</div>
-                        <input class="form-control footer-main__subscribe__email" type="email" name="email"
-                            placeholder="Your email address">
-                        <input class="footer-main__subscribe__button" type="button" value="subscribe">
+                        <form action="submit">
+                            <label for="email" class="sr-only">Email Address</label>
+                            <input class="form-control footer-main__subscribe__email" type="email" name="email" required="required"
+                                placeholder="Your email address">
+                            <button class="btn btn-primary footer-main__subscribe__button"
+                                type="submit">subscribe</button>
+                        </form>
                     </div>
                 </div>
                 <div class="row copyright-bar justify-content-between">
@@ -345,7 +349,8 @@
                         <input type="text" placeholder="Your Name  *" required>
                         <input type="email" placeholder="Your Email   *" required>
                         <input type="tel" placeholder="Phone">
-                        <textarea name="modal-form-input__message" class="modal-form-input__message" cols="40" rows="5"></textarea>
+                        <textarea name="modal-form-input__message" class="modal-form-input__message" cols="40"
+                            rows="5"></textarea>
                         <button class="btn btn-primary modal-form__submit" type="submit">submit</button>
                     </form>
                 </div>

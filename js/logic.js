@@ -19,6 +19,17 @@ $(document).ready(function () {
         $('.overlay').hide();
         $("button.navbar-toggler[data-target='#nav_topbar']").click();
     });
+    // modal "Ask a question"
+    $('[data-target="modal"]').on("click", function(event){
+        event.preventDefault();
+        $(".modal").show();
+    });
+
+    $('.close').on("click", function(event){
+        event.preventDefault();
+        $(".modal").hide();
+    });
+
     // lifestyle slider
     $('#lifestyle_carousel .carousel-item').each(function(){
         var next = $(this).next();

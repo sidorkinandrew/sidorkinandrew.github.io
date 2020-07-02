@@ -18,6 +18,10 @@
   display: none;
 }
 
+button:focus, input:focus, textarea:focus, a:focus {
+  outline: none;
+}
+
 .brand-major-color {
   color: #659ebc;
 }

@@ -58,7 +58,7 @@
             <div class="col-auto navbar-right justify-content-end">
                 <!--navbar-right -->
                 <a href="tel:+1-7003254245" class="top_nav_call_button">+1.700.325.4245</a>
-                <div class="navbar-right__form_button">Ask a question</div>
+                <button data-target="modal" class="navbar-right__form_button">Ask a question</button>
             </div><!-- /.navbar-right col-auto -->
         </div>
         <!--./row-->
@@ -336,6 +336,21 @@
             </div>
         </footer>
         <!-- /.footer-bar -->
+        <div class="modal">
+            <div class="modal-content">
+                <div class="close">&times;</div>
+                <h2>Ask a Question:</h2>
+                <div class="modal-form">
+                    <form action="submit">
+                        <input type="text" placeholder="Your Name  *" required>
+                        <input type="email" placeholder="Your Email   *" required>
+                        <input type="tel" placeholder="Phone">
+                        <textarea name="modal-form-input__message" class="modal-form-input__message" cols="40" rows="5"></textarea>
+                        <button class="btn btn-primary modal-form__submit" type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div> <!-- /.container -->
     <script src="./js/jquery-3.4.1.slim.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>

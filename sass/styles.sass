@@ -172,6 +172,8 @@ body
       padding: 1.4rem 4rem
       border-radius: 5px
       margin-right: 3rem
+      border: none
+      color: $white
     .top_nav_call_button
       color: $white
       margin-right: 4rem
@@ -445,3 +447,69 @@ hr
         border-radius: 1rem
         height: 0.8rem
         width: 3%
+.modal
+  background-color: rgba(60, 65, 77, 0.8)
+  position: fixed
+  left: 0
+  top: 0
+  height: 100%
+  width: 100% //display: block
+  &-content
+    position: relative
+    padding: 4rem 4rem
+    background: linear-gradient(0deg, #FAFAFA, #FAFAFA), linear-gradient(258.55deg, rgba(195, 195, 195, 0.7) 0.48%, rgba(7, 0, 92, 0.7) 98.77%), linear-gradient(258.55deg, rgba(74, 57, 139, 0.7) 0.48%, rgba(0, 174, 153, 0.7) 98.77%)
+    border-radius: 4px
+    background-blend-mode: normal, normal, hard-light
+    max-width: 50rem
+    width: 100%
+    max-height: 62rem
+    height: 100%
+    margin: 14rem auto
+    .close
+      text-align: center
+      position: absolute
+      top: 1.5rem
+      right: 1.5rem
+      font-size: 3rem
+      color: #5A5A5A
+      height: 3rem
+      width: 3rem
+      background: #E3E3E3
+      border-radius: 2px
+      &:hover
+        cursor: pointer
+    h2
+      line-height: 5rem
+      letter-spacing: -0.02em
+      color: #3F3F3F
+      @include title($_font_weight: 600, $_font_size: 3.6rem)
+  &-form
+    form
+      margin-top: 2.4rem
+      input, .modal-form-input__message
+        display: block
+        font-size: 1.8rem
+        width: 100%
+        background: #FFFFFF
+        border-radius: 5px
+        border: none
+        padding: 1.8rem 3.7rem
+        margin-top: 1.7rem
+        &::placeholder
+          color: #979797
+          font-family: Open Sans
+          font-size: 1.6rem
+      .modal-form-input__message
+        height: 13.5rem
+      .modal-form__submit
+        display: block
+        background-color: $brand-orange
+        text-align: center
+        @include title(500, 2.1rem)
+        letter-spacing: -0.02em
+        text-transform: uppercase
+        border-radius: 5px
+        width: 100%
+        margin-top: 2.7rem
+        margin-bottom: 5rem
+        padding: 1.4rem

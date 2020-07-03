@@ -1,18 +1,19 @@
 $(document).ready(function () {
   // Open navbarSide when button is clicked
-  $("button.navbar-toggler[data-target='#navbarToggler']").on(
-    "click",
+  $("button.navbar-toggler[data-target='#navbarToggler']").on("click",
     function () {
       if ($(this).hasClass("collapsed")) {
-        //$(".overlay").show();
+        $(".overlay").show();
+        //$(".navbar-brand").hide();
         //$(".navbar").css("height", "100vh");
         //$(".navbar").css("width", "90%");
         console.log("navbar-height: 100vh");
       } else {
         //$(".navbar").css("height", "auto");
         //$(".navbar").css("width", "100%");
+        //$(".navbar-brand").show();
         console.log("navbar-height: auto");
-        //$(".overlay").hide();
+        $(".overlay").hide();
       }
     }
   );

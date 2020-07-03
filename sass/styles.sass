@@ -87,7 +87,8 @@ body
 @include media_min($_min_width: $projector) // 1360 px
   .vegan-container // container max width
     max-width: 1300px
-
+.navbat-collapse
+  height: 100vh
 .navbar-brand
   position: relative
   top: -1rem
@@ -117,6 +118,7 @@ body
   background-color: $brand-minor
   text-decoration: none
   .navbar-toggler
+    z-index: +2
     border-color: $brand-minor
     height: 2.4rem
     width: 2.4rem
@@ -134,7 +136,7 @@ body
       list-style: none
       @include media_min($_min_width: $nokia)
         position: absolute
-        z-index: +1
+        z-index: +2
       @include media_min($_min_width: $notebook)
         position: relative
         display: flex
@@ -155,7 +157,6 @@ body
           text-decoration: none
           text-transform: uppercase
       .dropdown-menu // natural foods dropdown
-        position: absolute
         left: 3rem
         top: 5rem
         border-radius: 0
@@ -166,11 +167,12 @@ body
           background-color: $brand-minor
         @include media_min($_min_width: $notebook) // notebook+: brand minor on brand-light
           background-color: $brand-light
-        &__item  //.dropdown-item // inside dropdown
+        &__item
           width: 100%
           line-height: 200%
           @include title()
           @include media_min($_min_width: 0)// mobile: white on brand minor
+            position: relative
             color: $white
             background-color: $brand-minor
           @include media_min($_min_width: $notebook)
@@ -332,6 +334,7 @@ hr
   height: 100%
   margin-bottom: 10rem
   .carousel-indicators
+    z-index: +1
     li
       border-radius: 1rem
       height: 0.6rem
@@ -576,3 +579,13 @@ hr
         margin-top: 2.7rem
         margin-bottom: 5rem
         padding: 1.4rem
+.overlay
+  background-color: $brand-minor
+  z-index: +1
+  position: fixed
+  display: none
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  cursor: pointer

@@ -91,6 +91,9 @@ body h2, body h3 {
   .vegan-container {
     max-width: calc(100% - 2*15px);
   }
+  h4 {
+    font-size: 2.4rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -102,9 +105,6 @@ body h2, body h3 {
   }
   h3 {
     font-size: 2.8rem;
-  }
-  h4 {
-    font-size: 2.4rem;
   }
   h6 {
     font-size: 1.8rem;
@@ -396,12 +396,7 @@ body h2, body h3 {
   padding: 1.75rem;
   display: block;
   margin-right: 1rem;
-}
-
-@media (min-width: 320px) {
-  .navbar-row .navbar-right .top_nav_call_button__icon {
-    padding: 0.25rem;
-  }
+  padding: 0.25rem;
 }
 
 @media (min-width: 576px) {
@@ -425,12 +420,7 @@ body h2, body h3 {
   font-size: 2.1rem;
   text-align: right;
   letter-spacing: 0.1rem;
-}
-
-@media (min-width: 320px) {
-  .navbar-row .navbar-right .top_nav_call_button {
-    display: none;
-  }
+  display: none;
 }
 
 @media (min-width: 1200px) {
@@ -637,6 +627,8 @@ hr {
 }
 
 #front_carousel .carousel-indicators {
+  margin: auto;
+  width: 15%;
   z-index: +1;
 }
 
@@ -649,13 +641,48 @@ hr {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
 }
 
+#front_carousel .carousel-inner .carousel-item img {
+  object-fit: cover;
+  min-height: 46.5rem;
+}
+
+@media (min-width: 576px) {
+  #front_carousel .carousel-inner .carousel-item img {
+    min-height: 50.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #front_carousel .carousel-inner .carousel-item img {
+    min-height: 56rem;
+  }
+}
+
+@media (min-width: 992px) {
+  #front_carousel .carousel-inner .carousel-item img {
+    min-height: 70rem;
+  }
+}
+
 #front_carousel .carousel-inner .carousel-item .carousel-caption {
   height: 67%;
   font-family: Oswald;
   font-weight: 500;
-  font-size: 6.4rem;
+  font-size: 4.2rem;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 576px) {
+  #front_carousel .carousel-inner .carousel-item .carousel-caption h1 {
+    font-size: 4.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #front_carousel .carousel-inner .carousel-item .carousel-caption h1 {
+    font-size: 6.4rem;
+  }
 }
 
 #front_carousel .carousel-inner .carousel-item .carousel-caption h1 {
@@ -663,9 +690,6 @@ hr {
 }
 
 #front_carousel .carousel-inner .carousel-item .carousel-caption h4 {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 2.4rem;
   line-height: 2.8rem;
 }
 

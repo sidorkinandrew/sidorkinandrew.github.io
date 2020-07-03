@@ -63,6 +63,8 @@ body
 @include media_min($_min_width: $phone) // 576px
   .vegan-container // container max width
     max-width: calc(100% - 2*15px)
+  h4
+    font-size: 2.4rem
 @include media_min($_min_width: $tablet) // 768 px
   .vegan-container // container max width
     max-width: 750px
@@ -70,8 +72,6 @@ body
     font-size: 4.8rem
   h3
     font-size: 2.8rem
-  h4
-    font-size: 2.4rem
   h6
     font-size: 1.8rem
 @include media_min($_min_width: $notebook) // 992 px
@@ -225,8 +225,7 @@ body
       padding: 1.75rem
       display: block
       margin-right: 1rem
-      @include media_min($_min_width: $nokia)
-        padding: 0.25rem
+      padding: 0.25rem
       @include media_min($_min_width: $phone)
         margin-right: 2rem
         padding: 1rem
@@ -238,8 +237,7 @@ body
       @include title(400, 2.1rem)
       text-align: right
       letter-spacing: 0.1rem
-      @include media_min($_min_width: $nokia)
-        display: none
+      display: none
       @include media_min($_min_width: $desktop)
         display: block
       &::before
@@ -354,6 +352,8 @@ hr
   height: 100%
   margin-bottom: 10rem
   .carousel-indicators
+    margin: auto
+    width: 15%
     z-index: +1
     li
       border-radius: 1rem
@@ -361,15 +361,29 @@ hr
   .carousel-inner
     .carousel-item
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
+      img
+        object-fit: cover
+        min-height: 46.5rem
+        @include media_min($_min_width: $phone)
+          min-height: 50.5rem
+        @include media_min($_min_width: $tablet)
+          min-height: 56rem
+        @include media_min($_min_width: $notebook)
+          min-height: 70rem
       .carousel-caption
         height: 67%
-        @include title(500, 6.4rem)
+        @include title(500, 4.2rem)
         display: flex
         flex-direction: column
+        @include media_min($_min_width: $phone)
+          h1
+            font-size: 4.8rem
+        @include media_min($_min_width: $tablet)
+          h1
+            font-size: 6.4rem
         h1
           margin-bottom: 2rem
         h4
-          @include base(500, 2.4rem)
           line-height: 2.8rem
   .carousel-control-prev, .carousel-control-next
     align-items: flex-end

@@ -19,9 +19,9 @@
             <div class="col-auto navbar-left">
                 <nav class="navbar navbar-expand-lg">
                     <!--navbar-left-->
-                    <button class="navbar-toggler collapsed d-none" data-target="#nav_topbar" data-toggle="collapse"
+                    <button type="button" class="navbar-toggler collapsed" data-target="#nav_topbar" data-toggle="collapse"
                         aria-controls="nav_topbar" aria-expanded="false" aria-label="Hamburger Menu">
-                        <!--<span class="navbar-toggler-icon"></span>-->
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                     <a class="navbar-brand" href="#">
                         <div class="navbar-brand__wrap">
@@ -30,27 +30,29 @@
                             <span class="navbar-brand__wrap__paspartoo">Paspartoo Education Project</span>
                         </div>
                     </a><!-- /.navbar-brand -->
-                    <ul class="top-navigation-menu">
-                        <li class="top-navigation-menu__element dropdown">
-                            <a href="#" class="dropdown-toggle nav-link id=" navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Natural food
-                                &lt;</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Rainbow "Raw-Maine" Taco Boats</a>
-                                <a class="dropdown-item" href="#">Vegan Spinach and Mushroom Pasta</a>
-                                <a class="dropdown-item" href="#">Tokyo Splash Plate</a>
-                                <a class="dropdown-item" href="#">Thai Green Curry</a>
-                                <a class="dropdown-item" href="#">Vegan Avocado Plate</a>
-                                <a class="dropdown-item" href="#">Spinach Thai Green Curry</a>
-                            </div>
-                        </li>
-                        <li class="top-navigation-menu__element">
-                            <a href="#" class="nav-link">Lifestyle</a>
-                        </li>
-                        <li class="top-navigation-menu__element">
-                            <a href="#" class="nav-link">Contacts</a>
-                        </li>
-                    </ul><!-- /.top-navigation-men -->
+                    <div id="nav_topbar" class="collapse navbar-collapse">
+                        <ul class="top-navigation-menu navbar-nav mr-auto">
+                            <li class="top-navigation-menu__element dropdown nav-item">
+                                <a href="#" class="dropdown-toggle nav-link" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Natural food
+                                    &lt;</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Rainbow "Raw-Maine" Taco Boats</a>
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Vegan Spinach and Mushroom Pasta</a>
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Tokyo Splash Plate</a>
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Thai Green Curry</a>
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Vegan Avocado Plate</a>
+                                    <a class="dropdown-item dropdown-menu__item" href="#">Spinach Thai Green Curry</a>
+                                </div>
+                            </li>
+                            <li class="top-navigation-menu__element nav-item">
+                                <a href="#" class="nav-link">Lifestyle</a>
+                            </li>
+                            <li class="top-navigation-menu__element nav-item">
+                                <a href="#" class="nav-link">Contacts</a>
+                            </li>
+                        </ul><!-- /.top-navigation-men -->
+                    </div>
                 </nav> <!-- /<nav class="navbar navbar-expand-lg">-->
             </div> <!-- /.navbar-left -->
             <div class="col-auto navbar-right justify-content-end">
@@ -80,14 +82,14 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="img/background_02.webp" alt="">
                         <div class="carousel-caption">
-                            <h1>15 of the Best Vegan Snacks (02)</h1>
+                            <h1>15 of the Best Vegan Snacks</h1>
                             <h4>Struggling to fill the vegan gap between meals? We've got you covered</h4>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="img/background_01.webp" alt="">
                         <div class="carousel-caption">
-                            <h1>15 of the Best Vegan Snacks (03)</h1>
+                            <h1>15 of the Best Vegan Snacks</h1>
                             <h4>Struggling to fill the vegan gap between meals? We've got you covered</h4>
                         </div>
                     </div>
@@ -104,7 +106,7 @@
             <!--./front_carousel-->
         </div>
         <!--./hero-content-->
-        <div class="row vegan-container card-container">
+        <div class="row card-container">
             <h2 class="card-container__header">Natural food</h2>
             <div class="row card-groups">
                 <div class="card col-4">
@@ -201,7 +203,7 @@
             <button class="button__load_more" type="input"><a href="#">load more</a></button>
         </div>
         <!-- /.card-container -->
-        <div class="row vegan-container lifestyle-container">
+        <div class="row lifestyle-container">
             <h2 class="lifestyle-container__header">lifestyle</h2>
             <div id="lifestyle_carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner lifestyle-container__carousel">
@@ -307,7 +309,7 @@
                             </div>
                         </a><!-- /.navbar-brand -->
                     </div>
-                    <div class="col-3 footer-main__menu">
+                    <div class="col-2 footer-main__menu">
                         <li class="footer-navigation-menu__element">
                             <a href="#" class="footer-navigation-menu__link">Food</a>
                         </li>
@@ -356,6 +358,7 @@
                 </div>
             </div>
         </div>
+        <!--<div class="overlay"></div> -->
     </div> <!-- /.container -->
     <script src="./js/jquery-3.4.1.slim.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>

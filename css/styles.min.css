@@ -156,6 +156,16 @@ body h2, body h3 {
   color: #ffffff;
 }
 
+.navbar-brand__wrap__go, .navbar-brand__wrap__vegan {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@media (min-width: 992px) {
+  .navbar-brand__wrap__go, .navbar-brand__wrap__vegan {
+    text-shadow: none;
+  }
+}
+
 .navbar-brand__wrap__paspartoo {
   position: absolute;
   bottom: -0.5rem;
@@ -166,9 +176,15 @@ body h2, body h3 {
 .navbar-row {
   display: flex;
   align-content: center;
-  height: 11rem;
+  height: 6.8rem;
   background-color: #3c414d;
   text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  .navbar-row {
+    height: 11rem;
+  }
 }
 
 .navbar-row .navbar-brand {
@@ -379,6 +395,7 @@ body h2, body h3 {
   font-size: 2.1rem;
   display: flex;
   flex-direction: column;
+  line-height: 4rem;
 }
 
 .footer-bar .footer-main__callbutton {
@@ -400,7 +417,7 @@ body h2, body h3 {
   content: "Call us:";
   text-transform: uppercase;
   display: block;
-  padding-bottom: 1.4rem;
+  padding-bottom: 1rem;
   color: #d6e8f1;
   font-family: Oswald;
   font-weight: 400;
@@ -428,7 +445,7 @@ body h2, body h3 {
   flex-basis: 100%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .footer-bar .footer-main .footer-main__subscribe__text::before {
     content: "Subscribe to our news";
     text-transform: uppercase;
@@ -463,6 +480,13 @@ body h2, body h3 {
   font-size: 1.6rem;
   border: 0;
   padding: 1rem 10rem;
+}
+
+@media (min-width: 768px) {
+  .footer-bar .footer-main .footer-main__subscribe__button {
+    color: #ffffff;
+    background-color: #eb9411;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -555,6 +579,7 @@ hr {
 
 .card-container {
   display: flex;
+  margin: 0 2rem;
 }
 
 .card-container__header {
@@ -588,12 +613,31 @@ hr {
 }
 
 .card-container .card-groups .card {
-  flex-basis: calc(33.3333% - 2.8rem);
-  max-width: calc(33.3333% - 2.8rem);
-  margin: 1.4rem;
+  margin: 1.2rem;
   position: relative;
   width: 100%;
   border-radius: 10px;
+}
+
+@media (min-width: 320px) {
+  .card-container .card-groups .card {
+    flex-basis: calc(100% - 2.4rem);
+    max-width: calc(100% - 2.4rem);
+  }
+}
+
+@media (min-width: 576px) {
+  .card-container .card-groups .card {
+    flex-basis: calc(50% - 2.4rem);
+    max-width: calc(50% - 2.4rem);
+  }
+}
+
+@media (min-width: 992px) {
+  .card-container .card-groups .card {
+    flex-basis: calc(33.3333% - 2.4rem);
+    max-width: calc(33.3333% - 2.4rem);
+  }
 }
 
 .card-container .card-groups .card .card-title {
@@ -738,7 +782,7 @@ hr {
   margin: auto;
   position: relative;
   width: 100%;
-  margin-bottom: 15.2rem;
+  margin-bottom: 5rem;
   padding-left: 2rem;
 }
 
@@ -763,17 +807,12 @@ hr {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-}
-
-@media (min-width: 1200px) {
-  .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
-    top: 55%;
-  }
+  top: 55%;
 }
 
 @media (min-width: 1360px) {
   .lifestyle-container #lifestyle_carousel .carousel-inner .carousel-item .card .card-img-overlay {
-    top: 60%;
+    top: 70%;
   }
 }
 

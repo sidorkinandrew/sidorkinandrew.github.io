@@ -99,6 +99,10 @@ body
       color: $brand-major
     &__vegan
       color: $white
+    &__go, &__vegan
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+      @include media_min($_min_width: $notebook) // 992 px
+        text-shadow: none
     &__paspartoo
       position: absolute
       bottom: -0.5rem
@@ -107,7 +111,9 @@ body
 .navbar-row
   display: flex
   align-content: center
-  height: 11rem
+  height: 6.8rem
+  @include media_min($_min_width: $notebook)
+    height: 11rem
   background-color: $brand-minor
   text-decoration: none
   .navbar-brand
@@ -230,6 +236,7 @@ body
         @include title(400, 2.1rem)
         display: flex
         flex-direction: column
+        line-height: 4rem
     &__callbutton
       display: flex
       flex-direction: column
@@ -243,7 +250,7 @@ body
         content: "Call us:"
         text-transform: uppercase
         display: block
-        padding-bottom: 1.4rem
+        padding-bottom: 1rem
         color: $brand-light
         @include title(400, 2.4rem)
     .footer-main__subscribe
@@ -257,7 +264,7 @@ body
         margin-bottom: 1.8rem
         flex-basis: 100%
         &::before
-          @include media_min($_min_width: $desktop)
+          @include media_min($_min_width: $tablet)
             content: "Subscribe to our news"
             text-transform: uppercase
             display: block
@@ -276,6 +283,9 @@ body
         @include title()
         border: 0
         padding: 1rem 10rem
+        @include media_min($_min_width: $tablet)
+          color: $white
+          background-color: $brand-orange
         @include media_min($_min_width: $desktop)
           color: $brand-orange
           background-color: black
@@ -328,6 +338,7 @@ hr
     margin-bottom: 4.3rem
 .card-container
   display: flex
+  margin: 0 2rem
   &__header
     text-transform: uppercase
     color: #18171C
@@ -350,9 +361,16 @@ hr
       color: #659EBC
   .card-groups
     .card
-      flex-basis: calc(33.3333% - 2.8rem)
-      max-width: calc(33.3333% - 2.8rem)
-      margin: 1.4rem
+      margin: 1.2rem
+      @include media_min($_min_width: $nokia)
+        flex-basis: calc(100% - 2.4rem)
+        max-width: calc(100% - 2.4rem)
+      @include media_min($_min_width: $phone)
+        flex-basis: calc(50% - 2.4rem)
+        max-width: calc(50% - 2.4rem)
+      @include media_min($_min_width: $notebook)
+        flex-basis: calc(33.3333% - 2.4rem)
+        max-width: calc(33.3333% - 2.4rem)
       position: relative
       width: 100%
       border-radius: 10px
@@ -427,7 +445,7 @@ hr
     margin: auto
     position: relative
     width: 100%
-    margin-bottom: 15.2rem
+    margin-bottom: 5rem
     padding-left: 2rem
     .carousel-inner .carousel-item.active,
     .carousel-inner .carousel-item-next,
@@ -446,10 +464,9 @@ hr
             display: flex
             justify-content: space-between
             flex-direction: column
-            @include media_min($desktop)
-              top: 55%
+            top: 55%
             @include media_min($projector)
-              top: 60%
+              top: 70%
             .card-title
               @include title($_font_weight: 400, $_font_size: 2.4rem)
             .card-text-date

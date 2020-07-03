@@ -350,7 +350,6 @@ hr
 #front_carousel
   margin: auto
   height: 100%
-  margin-bottom: 10rem
   .carousel-indicators
     margin: auto
     width: 15%
@@ -391,12 +390,23 @@ hr
 .card-container
   display: flex
   margin: 0 2rem
+  @include media_min($_min_width: 0)
+    margin-top: 5rem
+  @include media_min($_min_width: $tablet)
+    margin-top: 6.5rem
+  @include media_min($_min_width: $notebook)
+    margin-top: 10rem
   &__header
     text-transform: uppercase
     color: #18171C
     background-color: #ffffff
     @include title(500, 3.6rem)
-    margin-bottom: 4.3rem
+    @include media_min($_min_width: 0)
+      margin-top: 2.7rem
+    @include media_min($_min_width: $phone)
+      margin-top: 3.7rem
+    @include media_min($_min_width: $notebook)
+      margin-bottom: 4.3rem
   .button__load_more
     margin: auto
     border: 1px solid #659EBC

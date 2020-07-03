@@ -91,9 +91,13 @@ body
   height: 100vh
 .navbar-brand
   position: relative
-  top: -1rem
+  top: -0.5rem
   &__wrap
-    @include title(400, 4rem)
+    @include title(400, 2.5rem)
+    @include media_min($_min_width: $phone)
+      @include title(400, 3rem)
+    @include media_min($_min_width: $notebook)
+      @include title(400, 4rem)
     display: flex
     flex-wrap: wrap
     &__go
@@ -101,14 +105,16 @@ body
     &__vegan
       color: $white
     &__go, &__vegan
-      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+      text-shadow: none
+      @include media_min($_min_width: $tablet) // 992 px
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
       @include media_min($_min_width: $notebook) // 992 px
         text-shadow: none
     &__paspartoo
       position: absolute
       bottom: -0.5rem
       color: $white
-      font-size: calc(35%)
+      font-size: calc(33.33%)
 .navbar-row
   display: flex
   align-content: center
@@ -130,7 +136,10 @@ body
       background-position: center center
       transition: 500ms rotate(45deg)
   .navbar-brand
-    margin-left: 3rem
+    margin-left: 0
+    margin-right: 0
+    @include media_min($_min_width: $phone)
+      margin-left: 3rem
   .navbar-left
     .top-navigation-menu
       list-style: none
@@ -189,10 +198,17 @@ body
     text-decoration: none
     &__form_button
       background-color: $brand-orange
-      @include title(500, 2.1rem)
       letter-spacing: -0.02em
       text-transform: uppercase
-      padding: 1.4rem 5rem
+      @include title(500, 1.6rem)
+      @include media_min($_min_width: $nokia)
+        padding: 0.2rem 1rem
+      @include media_min($_min_width: $phone)
+        @include title(500, 1.8rem)
+        padding: 0.8rem 4rem
+      @include media_min($_min_width: $notebook)
+        @include title(500, 2.1rem)
+        padding: 1.4rem 5rem
       border-radius: 5px
       margin-right: 3rem
       border: none
@@ -207,9 +223,13 @@ body
       transform: rotate(270deg)
       border: 1px solid #D6E8F1
       padding: 1.75rem
-      margin-right: 2rem
+      display: block
+      margin-right: 1rem
       @include media_min($_min_width: $nokia)
-        display: block
+        padding: 0.25rem
+      @include media_min($_min_width: $phone)
+        margin-right: 2rem
+        padding: 1rem
       @include media_min($_min_width: $desktop)
         display: none
     .top_nav_call_button

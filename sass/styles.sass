@@ -92,7 +92,7 @@ body
   position: relative
   top: -1rem
   &__wrap
-    @include title(400, 3.8rem)
+    @include title(400, 4rem)
     display: flex
     flex-wrap: wrap
     &__go
@@ -169,17 +169,36 @@ body
       @include title(500, 2.1rem)
       letter-spacing: -0.02em
       text-transform: uppercase
-      padding: 1.4rem 4rem
+      padding: 1.4rem 5rem
       border-radius: 5px
       margin-right: 3rem
       border: none
       color: $white
+    .top_nav_call_button__icon
+      color: $brand-light
+      border-radius: 5px
+      font-size: 2.1rem
+      line-height: 1.8rem
+      text-align: center
+      font-weight: 900
+      transform: rotate(270deg)
+      border: 1px solid #D6E8F1
+      padding: 1.75rem
+      margin-right: 2rem
+      @include media_min($_min_width: $nokia)
+        display: block
+      @include media_min($_min_width: $desktop)
+        display: none
     .top_nav_call_button
       color: $white
       margin-right: 4rem
       @include title(400, 2.1rem)
       text-align: right
       letter-spacing: 0.1rem
+      @include media_min($_min_width: $nokia)
+        display: none
+      @include media_min($_min_width: $desktop)
+        display: block
       &::before
         @include media_min($_min_width: $projector)
           content: "Call Now: "
@@ -337,14 +356,19 @@ hr
       position: relative
       width: 100%
       border-radius: 10px
+      .card-title
+        margin: 0 1.8rem
       .card-img-overlay
         top: 60%
       .card-text-price
         position: absolute
+        margin: 0 1.8rem
+        @include media_min($notebook)
+          bottom: 1.25rem
         @include media_min($desktop)
-          bottom: 1rem
-        @include media_min($projector)
           bottom: 2rem
+        @include media_min($projector)
+          bottom: 3rem
       .card-img-overlay-hover
         background-color: #000000
         border-radius: 10px      
@@ -357,23 +381,30 @@ hr
           position: absolute
           display: inline
           color: $brand-light
-          @include media_min($desktop)
+          @include media_min($notebook)
             padding: 1rem
           @include media_min($projector)
             padding: 2rem
           background-color: rgba(0,0,0,0.5)
           &__text
             position: relative
-            @include base(500, 1.6rem)
+            @include media_min($notebook)
+              margin-top: 6rem
+              @include base(500, 1.4rem)
             @include media_min($desktop)
               margin-top: 9rem
+              @include base(500, 1.6rem)
             @include media_min($projector)
               margin-top: 10rem
             line-height: 140%
         .card-title
           position: absolute
+          @include media_min($notebook)
+            padding: 0.25rem
+            margin: 0
+            line-height: 2.5rem
           @include media_min($desktop)
-            padding: 0
+            padding: 0.5rem
             margin: 0
           @include media_min($projector)
             margin-top: 1rem

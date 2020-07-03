@@ -143,7 +143,7 @@ body h2, body h3 {
 .navbar-brand__wrap {
   font-family: Oswald;
   font-weight: 400;
-  font-size: 3.8rem;
+  font-size: 4rem;
   display: flex;
   flex-wrap: wrap;
 }
@@ -276,11 +276,36 @@ body h2, body h3 {
   font-size: 2.1rem;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  padding: 1.4rem 4rem;
+  padding: 1.4rem 5rem;
   border-radius: 5px;
   margin-right: 3rem;
   border: none;
   color: #ffffff;
+}
+
+.navbar-row .navbar-right .top_nav_call_button__icon {
+  color: #d6e8f1;
+  border-radius: 5px;
+  font-size: 2.1rem;
+  line-height: 1.8rem;
+  text-align: center;
+  font-weight: 900;
+  transform: rotate(270deg);
+  border: 1px solid #D6E8F1;
+  padding: 1.75rem;
+  margin-right: 2rem;
+}
+
+@media (min-width: 320px) {
+  .navbar-row .navbar-right .top_nav_call_button__icon {
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-row .navbar-right .top_nav_call_button__icon {
+    display: none;
+  }
 }
 
 .navbar-row .navbar-right .top_nav_call_button {
@@ -291,6 +316,18 @@ body h2, body h3 {
   font-size: 2.1rem;
   text-align: right;
   letter-spacing: 0.1rem;
+}
+
+@media (min-width: 320px) {
+  .navbar-row .navbar-right .top_nav_call_button {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-row .navbar-right .top_nav_call_button {
+    display: block;
+  }
 }
 
 @media (min-width: 1360px) {
@@ -559,23 +596,34 @@ hr {
   border-radius: 10px;
 }
 
+.card-container .card-groups .card .card-title {
+  margin: 0 1.8rem;
+}
+
 .card-container .card-groups .card .card-img-overlay {
   top: 60%;
 }
 
 .card-container .card-groups .card .card-text-price {
   position: absolute;
+  margin: 0 1.8rem;
+}
+
+@media (min-width: 992px) {
+  .card-container .card-groups .card .card-text-price {
+    bottom: 1.25rem;
+  }
 }
 
 @media (min-width: 1200px) {
   .card-container .card-groups .card .card-text-price {
-    bottom: 1rem;
+    bottom: 2rem;
   }
 }
 
 @media (min-width: 1360px) {
   .card-container .card-groups .card .card-text-price {
-    bottom: 2rem;
+    bottom: 3rem;
   }
 }
 
@@ -597,7 +645,7 @@ hr {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .card-container .card-groups .card:hover .card-img-overlay-hover {
     padding: 1rem;
   }
@@ -611,15 +659,24 @@ hr {
 
 .card-container .card-groups .card:hover .card-img-overlay-hover__text {
   position: relative;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 1.6rem;
   line-height: 140%;
+}
+
+@media (min-width: 992px) {
+  .card-container .card-groups .card:hover .card-img-overlay-hover__text {
+    margin-top: 6rem;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
 }
 
 @media (min-width: 1200px) {
   .card-container .card-groups .card:hover .card-img-overlay-hover__text {
     margin-top: 9rem;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 1.6rem;
   }
 }
 
@@ -634,9 +691,17 @@ hr {
   z-index: +1;
 }
 
+@media (min-width: 992px) {
+  .card-container .card-groups .card:hover .card-title {
+    padding: 0.25rem;
+    margin: 0;
+    line-height: 2.5rem;
+  }
+}
+
 @media (min-width: 1200px) {
   .card-container .card-groups .card:hover .card-title {
-    padding: 0;
+    padding: 0.5rem;
     margin: 0;
   }
 }

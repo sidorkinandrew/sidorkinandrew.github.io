@@ -37,8 +37,11 @@ $(document).ready(function () {
         next = $(this).siblings(':first');
         }
         next.children(':first-child').clone().appendTo($(this));
+
+        var current_window_width = $(window).width();
+        var max_middle_slides = current_window_width >= 1200 ? 2 : (current_window_width <= 576 ? 0 : 1);
         
-        for (var i=0;i<2;i++) {
+        for (var i=0;i<max_middle_slides;i++) {
             next=next.next();
             if (!next.length) {
                 next = $(this).siblings(':first');

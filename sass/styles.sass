@@ -116,17 +116,34 @@ body
     height: 11rem
   background-color: $brand-minor
   text-decoration: none
+  .navbar-toggler
+    border-color: $brand-minor
+    height: 2.4rem
+    width: 2.4rem
+    transition: 500ms rotate(-45deg)
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")
+    &:not(.collapsed)
+      background-image: url('../img/close-hamburger-menu.png')
+      background-repeat: no-repeat
+      background-position: center center
+      transition: 500ms rotate(45deg)
   .navbar-brand
     margin-left: 3rem
   .navbar-left
     .top-navigation-menu
       list-style: none
-      display: flex
+      @include media_min($_min_width: $nokia)
+        position: absolute
+        z-index: +1
+      @include media_min($_min_width: $notebook)
+        position: relative
+        display: flex
       @include title(500, 2.1rem)
       letter-spacing: 0.05em
       margin: 0
       padding: 0
       .dropdown
+        position: relative
         @include media_min($_min_width: $desktop)
           margin-left: 0
         @include media_min($_min_width: $projector)
@@ -137,8 +154,6 @@ body
           color: $white
           text-decoration: none
           text-transform: uppercase
-      .dropdown 
-        position: relative
       .dropdown-menu // natural foods dropdown
         position: absolute
         left: 3rem
@@ -151,7 +166,7 @@ body
           background-color: $brand-minor
         @include media_min($_min_width: $notebook) // notebook+: brand minor on brand-light
           background-color: $brand-light
-        .dropdown-item // inside dropdown
+        &__item  //.dropdown-item // inside dropdown
           width: 100%
           line-height: 200%
           @include title()

@@ -1,15 +1,17 @@
 $(document).ready(function () {
   // Open navbarSide when button is clicked
-  $("button.navbar-toggler[data-target='#nav_topbar']").on(
+  $("button.navbar-toggler[data-target='#navbarToggler']").on(
     "click",
     function () {
       if ($(this).hasClass("collapsed")) {
         //$(".overlay").show();
-        $(".navbar").css("height", "100vh");
-        $(".navbar").css("width", "90%");
+        //$(".navbar").css("height", "100vh");
+        //$(".navbar").css("width", "90%");
+        console.log("navbar-height: 100vh");
       } else {
-        $(".navbar").css("height", "auto");
-        $(".navbar").css("width", "100%");
+        //$(".navbar").css("height", "auto");
+        //$(".navbar").css("width", "100%");
+        console.log("navbar-height: auto");
         //$(".overlay").hide();
       }
     }
@@ -20,7 +22,7 @@ $(document).ready(function () {
     $(".navbar").css("height", "auto");
     $(".navbar").css("width", "100%");
     $(".overlay").hide();
-    $("button.navbar-toggler[data-target='#nav_topbar']").click();
+    $("button.navbar-toggler[data-target='#navbarToggler']").click();
   });
 
   // modal "Ask a question" - show

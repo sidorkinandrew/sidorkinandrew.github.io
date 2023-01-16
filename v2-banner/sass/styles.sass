@@ -1,0 +1,635 @@
+@import "vars"
+@import "reset"
+
+@mixin media_min($_min_width)
+  @media (min-width: $_min_width)
+    @content
+
+@mixin title($_font_weight: 400, $_font_size: 1.6rem)
+  font-family: Oswald
+  font-weight: $_font_weight
+  font-size: $_font_size
+
+@mixin base($_font_weight: 400, $_font_size: 1.6rem)
+  font-family: Roboto
+  font-weight: $_font_weight
+  font-size: $_font_size
+
+
+// theme colors
+.brand-major-color
+  color: $brand-major
+.white-color
+  color: $white
+
+// all elements
+html
+  font-size: 10px
+
+body
+  color: $white
+  font-family: 'Roboto', sans-serif
+  a
+    text-decoration: none
+    color: $white
+    &:hover
+      text-decoration: none
+      color: $white
+  h2, h3
+    font-family: 'Oswald', sans-serif
+
+.container
+  margin: auto
+  max-width: 100%
+@include media_min($_min_width: $nokia) // 320 px
+  .vegan-container // container max width
+    margin: auto
+    max-width: 100vw
+    padding: 0px
+  h1
+    font-size: 4.2rem
+  h2
+    font-size: 3.6rem
+  h3
+    font-size: 2.4rem
+  h4
+    font-size: 2.1rem
+  h5
+    font-size: 1.6rem
+  h6
+    font-size: 1.6rem
+  p
+    font-size: 1.6rem
+@include media_min($_min_width: $phone) // 576px
+  .vegan-container // container max width
+    max-width: calc(100% - 2*15px)
+  h4
+    font-size: 2.4rem
+@include media_min($_min_width: $tablet) // 768 px
+  .vegan-container // container max width
+    max-width: 750px
+  h1
+    font-size: 4.8rem
+  h3
+    font-size: 2.8rem
+  h6
+    font-size: 1.8rem
+@include media_min($_min_width: $notebook) // 992 px
+  .vegan-container // container max width
+    max-width: 960px
+  h1
+    font-size: 6.4rem
+@include media_min($_min_width: $desktop) // 1200 px
+  .vegan-container // container max width
+    max-width: 1140px
+  h6
+    font-size: 2.1rem
+@include media_min($_min_width: $projector) // 1360 px
+  .vegan-container // container max width
+    max-width: 1300px
+.navbat-collapse
+  height: 100vh
+.navbar-brand
+  position: relative
+  top: -0.5rem
+  &__wrap
+    @include title(400, 2.5rem)
+    @include media_min($_min_width: $phone)
+      @include title(400, 3rem)
+    @include media_min($_min_width: $notebook)
+      @include title(400, 4rem)
+    display: flex
+    flex-wrap: wrap
+    &__go
+      color: $brand-major
+    &__vegan
+      color: $white
+    &__go, &__vegan
+      text-shadow: none
+      @include media_min($_min_width: $tablet) // 992 px
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+      @include media_min($_min_width: $notebook) // 992 px
+        text-shadow: none
+    &__paspartoo
+      position: absolute
+      bottom: -0.5rem
+      color: $white
+      font-size: calc(33.33%)
+.navbar-row
+  display: flex
+  align-content: center
+  height: 6.8rem
+  @include media_min($_min_width: $notebook)
+    height: 11rem
+  background-color: $brand-minor
+  text-decoration: none
+  .navbar-toggler
+    z-index: +2
+    border-color: $brand-minor
+    height: 2.4rem
+    width: 2.4rem
+    transition: 500ms rotate(-45deg)
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")
+    &:not(.collapsed)
+      background-image: url('../img/close-hamburger-menu.png')
+      background-repeat: no-repeat
+      background-position: center center
+      transition: 500ms rotate(45deg)
+  .navbar-brand
+    margin-left: 0
+    margin-right: 0
+    @include media_min($_min_width: $phone)
+      margin-left: 3rem
+  .navbar-left
+    .top-navigation-menu
+      list-style: none
+      @include media_min($_min_width: $nokia)
+        position: absolute
+        z-index: +2
+      @include media_min($_min_width: $notebook)
+        position: relative
+        display: flex
+      @include title(500, 2.1rem)
+      letter-spacing: 0.05em
+      margin: 0
+      padding: 0
+      .dropdown
+        position: relative
+        @include media_min($_min_width: $desktop)
+          margin-left: 0
+        @include media_min($_min_width: $projector)
+          margin-left: 11rem
+      li
+        padding-left: 2rem
+        .nav-link
+          color: $white
+          text-decoration: none
+          text-transform: uppercase
+      .dropdown-menu // natural foods dropdown
+        left: 3rem
+        top: 5rem
+        border-radius: 0
+        padding: 2rem 0.75rem 
+        transition: 300ms ease
+        @include media_min($_min_width: 0) // mobile: white on brand minor
+          color: $white
+          background-color: $brand-minor
+        @include media_min($_min_width: $notebook) // notebook+: brand minor on brand-light
+          background-color: $brand-light
+        &__item
+          width: 100%
+          line-height: 200%
+          @include title()
+          @include media_min($_min_width: 0)// mobile: white on brand minor
+            position: relative
+            color: $white
+            background-color: $brand-minor
+          @include media_min($_min_width: $notebook)
+            color: $brand-minor
+            background-color: $brand-light // notebook+: brand minor on brand-light
+            &:active  // notebook::active+: brand orange on brand-light
+              color: $brand-orange
+            &:hover  // notebook::active+: brand orange on brand-light
+              color: $brand-orange
+  .navbar-right
+    display: flex
+    align-items: center
+    padding: 0
+    text-decoration: none
+    &__form_button
+      background-color: $brand-orange
+      letter-spacing: -0.02em
+      text-transform: uppercase
+      @include title(500, 1.6rem)
+      @include media_min($_min_width: $nokia)
+        padding: 0.2rem 1rem
+      @include media_min($_min_width: $phone)
+        @include title(500, 1.8rem)
+        padding: 0.8rem 4rem
+      @include media_min($_min_width: $notebook)
+        @include title(500, 2.1rem)
+        padding: 1.4rem 5rem
+      border-radius: 5px
+      margin-right: 3rem
+      border: none
+      color: $white
+    .top_nav_call_button__icon
+      color: $brand-light
+      border-radius: 5px
+      font-size: 2.1rem
+      line-height: 1.8rem
+      text-align: center
+      font-weight: 900
+      transform: rotate(270deg)
+      border: 1px solid #D6E8F1
+      padding: 1.75rem
+      display: block
+      margin-right: 1rem
+      padding: 0.25rem
+      @include media_min($_min_width: $phone)
+        margin-right: 2rem
+        padding: 1rem
+      @include media_min($_min_width: $desktop)
+        display: none
+    .top_nav_call_button
+      color: $white
+      margin-right: 4rem
+      @include title(400, 2.1rem)
+      text-align: right
+      letter-spacing: 0.1rem
+      display: none
+      @include media_min($_min_width: $desktop)
+        display: block
+      &::before
+        @include media_min($_min_width: $projector)
+          content: "Call Now: "
+.footer-bar
+  height: 35rem
+  background-color: $brand-minor
+  .footer-main
+    padding-top: 7.4rem // max-width: 1300px
+    margin: auto
+    padding-bottom: 5rem
+    border-bottom: 1px solid #ffffff
+    &__brand
+      .navbar-brand
+        margin-left: 0
+    .footer-navigation-menu
+      text-decoration: none
+      &__element
+        list-style: none
+        &:first-child::before
+          content: "Main menu"
+          display: block
+          padding-bottom: 1.4rem
+          color: $brand-light
+          text-transform: uppercase
+          @include title(400, 2.4rem)
+      &__link
+        color: $brand-light
+        text-transform: uppercase
+        @include title(400, 2.1rem)
+        display: flex
+        flex-direction: column
+        line-height: 4rem
+    &__callbutton
+      display: flex
+      flex-direction: column
+    .footer_call_button
+      @include title(500, 2.8rem)
+      color: $brand-orange
+      line-height: 41px
+      letter-spacing: 0.05em
+      text-transform: uppercase
+      &::before
+        content: "Call us:"
+        text-transform: uppercase
+        display: block
+        padding-bottom: 1rem
+        color: $brand-light
+        @include title(400, 2.4rem)
+    .footer-main__subscribe
+      @include media_min($_min_width: $desktop)
+        margin-top: 0
+      @include media_min($_min_width: $projector)
+        margin-top: 4.1rem
+      &__text
+        color: $brand-light
+        @include title(400, 1.4rem)
+        margin-bottom: 1.8rem
+        flex-basis: 100%
+        &::before
+          @include media_min($_min_width: $tablet)
+            content: "Subscribe to our news"
+            text-transform: uppercase
+            display: block
+            @include title(400, 2.4rem)
+          @include media_min($_min_width: $projector)
+            content: " "
+      &__email
+        color: #D6E8F1
+        @include base(400, 1.6rem)
+        width: 30rem
+        margin-bottom: 1.2rem
+      &__button
+        border-radius: 2px
+        width: 30rem
+        text-transform: uppercase
+        @include title()
+        border: 0
+        padding: 1rem 10rem
+        @include media_min($_min_width: $tablet)
+          color: $white
+          background-color: $brand-orange
+        @include media_min($_min_width: $desktop)
+          color: $brand-orange
+          background-color: black
+        @include media_min($_min_width: $projector)
+          color: $white
+          background-color: $brand-orange
+  .copyright-bar
+    max-width: 1300px
+    margin: auto
+    padding-top: 2.2rem
+    .copyright
+      @include base(400, 1.4rem)
+      color: $brand-light
+    .educational-project
+      @include base(400, 1.4rem)
+      color: $brand-light
+    .footer-paspartoo-href
+      color: $brand-orange
+      text-decoration: none
+hr
+  display: block
+  height: 1px
+  border: 0
+  border-top: 1px solid #ccc
+  margin: 1em 0
+  padding: 0
+#front_carousel
+  margin: auto
+  height: 100%
+  .carousel-indicators
+    margin: auto
+    width: 15%
+    z-index: +1
+    li
+      border-radius: 1rem
+      height: 0.6rem
+  .carousel-inner
+    .carousel-item
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
+      img
+        object-fit: cover
+        min-height: 46.5rem
+        @include media_min($_min_width: $phone)
+          min-height: 50.5rem
+        @include media_min($_min_width: $tablet)
+          min-height: 56rem
+        @include media_min($_min_width: $notebook)
+          min-height: 70rem
+      .carousel-caption
+        height: 67%
+        @include title(500, 4.2rem)
+        display: flex
+        flex-direction: column
+        @include media_min($_min_width: $phone)
+          h1
+            font-size: 4.8rem
+        @include media_min($_min_width: $tablet)
+          h1
+            font-size: 6.4rem
+        h1
+          margin-bottom: 2rem
+        h4
+          line-height: 2.8rem
+  .carousel-control-prev, .carousel-control-next
+    align-items: flex-end
+    margin-bottom: 4.3rem
+.card-container
+  display: flex
+  margin: 0 2rem
+  @include media_min($_min_width: 0)
+    margin-top: 5rem
+  @include media_min($_min_width: $tablet)
+    margin-top: 6.5rem
+  @include media_min($_min_width: $notebook)
+    margin-top: 10rem
+  &__header
+    text-transform: uppercase
+    color: #18171C
+    background-color: #ffffff
+    @include title(500, 3.6rem)
+    @include media_min($_min_width: 0)
+      margin-top: 2.7rem
+    @include media_min($_min_width: $phone)
+      margin-top: 3.7rem
+    @include media_min($_min_width: $notebook)
+      margin-bottom: 4.3rem
+  .button__load_more
+    margin: auto
+    border: 1px solid #659EBC
+    box-sizing: border-box
+    border-radius: 2px
+    text-align: center
+    padding: 1rem 6rem
+    margin-top: 5rem
+    margin-bottom: 7rem
+    background-color: $white
+    a
+      @include base(400, 1.6rem)
+      text-transform: uppercase
+      color: #659EBC
+  .card-groups
+    .card
+      margin: 1.2rem
+      @include media_min($_min_width: $nokia)
+        flex-basis: calc(100% - 2.4rem)
+        max-width: calc(100% - 2.4rem)
+      @include media_min($_min_width: $phone)
+        flex-basis: calc(50% - 2.4rem)
+        max-width: calc(50% - 2.4rem)
+      @include media_min($_min_width: $notebook)
+        flex-basis: calc(33.3333% - 2.4rem)
+        max-width: calc(33.3333% - 2.4rem)
+      position: relative
+      width: 100%
+      border-radius: 10px
+      .card-title
+        margin: 0 1.8rem
+      .card-img-overlay
+        top: 60%
+      .card-text-price
+        position: absolute
+        margin: 0 1.8rem
+        @include media_min($notebook)
+          bottom: 1.25rem
+        @include media_min($desktop)
+          bottom: 2rem
+        @include media_min($projector)
+          bottom: 3rem
+      .card-img-overlay-hover
+        background-color: #000000
+        border-radius: 10px      
+        height: 100%
+        display: none
+      &:hover
+        .card-img-overlay
+          top: 0
+        .card-img-overlay-hover
+          position: absolute
+          display: inline
+          color: $brand-light
+          @include media_min($notebook)
+            padding: 1rem
+          @include media_min($projector)
+            padding: 2rem
+          background-color: rgba(0,0,0,0.5)
+          &__text
+            position: relative
+            @include media_min($notebook)
+              margin-top: 6rem
+              @include base(500, 1.4rem)
+            @include media_min($desktop)
+              margin-top: 9rem
+              @include base(500, 1.6rem)
+            @include media_min($projector)
+              margin-top: 10rem
+            line-height: 140%
+        .card-title
+          position: absolute
+          @include media_min($notebook)
+            padding: 0.25rem
+            margin: 0
+            line-height: 2.5rem
+          @include media_min($desktop)
+            padding: 0.5rem
+            margin: 0
+          @include media_min($projector)
+            margin-top: 1rem
+            padding: 1rem
+          z-index: +1
+        .card-text-price
+          display: none
+.lifestyle-container
+  background-color: #F5F5F5
+  display: flex
+  &__header
+    text-transform: uppercase
+    color: #18171C
+    @include title(500, 3.6rem) 
+    margin-bottom: 3.7rem
+    margin-top: 6.7rem
+    margin-left: 3.4rem
+    flex-basis: 100%
+  #lifestyle_carousel
+    margin: auto
+    position: relative
+    width: 100%
+    margin-bottom: 5rem
+    padding-left: 2rem
+    .carousel-inner .carousel-item.active,
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev
+      display: flex
+    .carousel-inner
+      display: flex
+      .carousel-item
+        .lifestyle-container_link
+          margin-right: 2rem
+          width: 100%
+        .card
+          .card-img-overlay
+            align-content: flex-end
+            flex-wrap: wrap
+            display: flex
+            justify-content: space-between
+            flex-direction: column
+            top: 55%
+            @include media_min($projector)
+              top: 70%
+            .card-title
+              @include title($_font_weight: 400, $_font_size: 2.4rem)
+            .card-text-date
+              align-self: flex-start
+              font-family: HelveticaNeueCyr
+              font-size: 14px
+              line-height: 14px
+    .lifestyle-carousel-controls
+      filter: invert(50%)
+      display: flex
+      margin-top: 7rem
+      justify-content: space-between
+      .carousel-control-prev,
+      .carousel-control-next
+        position: relative
+        top: -2.5rem
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon
+        width: 2.5rem
+        height: 2.5rem
+      .carousel-control-prev
+        padding-right: 10rem
+      .carousel-control-next
+        padding-left: 10rem
+      li
+        border-radius: 1rem
+        height: 0.8rem
+        width: 3%
+.modal
+  background-color: rgba(60, 65, 77, 0.8)
+  position: fixed
+  left: 0
+  top: 0
+  height: 100%
+  width: 100% //display: block
+  &-content
+    position: relative
+    padding: 4rem 4rem
+    background: linear-gradient(0deg, #FAFAFA, #FAFAFA), linear-gradient(258.55deg, rgba(195, 195, 195, 0.7) 0.48%, rgba(7, 0, 92, 0.7) 98.77%), linear-gradient(258.55deg, rgba(74, 57, 139, 0.7) 0.48%, rgba(0, 174, 153, 0.7) 98.77%)
+    border-radius: 4px
+    background-blend-mode: normal, normal, hard-light
+    max-width: 50rem
+    width: 100%
+    max-height: 62rem
+    height: 100%
+    margin: 14rem auto
+    .close
+      text-align: center
+      position: absolute
+      top: 1.5rem
+      right: 1.5rem
+      font-size: 3rem
+      color: #5A5A5A
+      height: 3rem
+      width: 3rem
+      background: #E3E3E3
+      border-radius: 2px
+      &:hover
+        cursor: pointer
+    h2
+      line-height: 5rem
+      letter-spacing: -0.02em
+      color: #3F3F3F
+      @include title($_font_weight: 600, $_font_size: 3.6rem)
+  &-form
+    form
+      margin-top: 2.4rem
+      input, .modal-form-input__message
+        display: block
+        font-size: 1.8rem
+        width: 100%
+        background: #FFFFFF
+        border-radius: 5px
+        border: none
+        padding: 1.8rem 3.7rem
+        margin-top: 1.7rem
+        &::placeholder
+          color: #979797
+          font-family: Open Sans
+          font-size: 1.6rem
+      .modal-form-input__message
+        height: 13.5rem
+      .modal-form__submit
+        display: block
+        background-color: $brand-orange
+        text-align: center
+        @include title(500, 2.1rem)
+        letter-spacing: -0.02em
+        text-transform: uppercase
+        border-radius: 5px
+        width: 100%
+        margin-top: 2.7rem
+        margin-bottom: 5rem
+        padding: 1.4rem
+.overlay
+  background-color: $brand-minor
+  z-index: +1
+  position: fixed
+  display: none
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  cursor: pointer

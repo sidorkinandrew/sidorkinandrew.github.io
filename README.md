@@ -1,1 +1,1 @@
-# govegan
+# go go vegan go

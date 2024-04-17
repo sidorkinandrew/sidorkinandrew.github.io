@@ -1,0 +1,149 @@
+@import "vars"
+@import "reset"
+
+@mixin title($_font_weight)
+  font-family: Oswald
+  font-weight: $_font_weight
+
+@mixin base($_font_weight: 400)
+  font-family: Roboto
+  font-weight: $_font_weight
+
+@mixin media_min($_min_width)
+  @media (min-width: $_min_width)
+    @content
+
+// theme colors
+.brand-major-color
+  color: $brand-major
+.white-color
+  color: $white
+
+// theme fonts
+.title-main
+  @include title(600)
+.base-heavy
+  @include base(600)
+
+// all elements
+html
+ color: $white
+ body
+   color: $white
+ font-family: 'Roboto', sans-serif
+ h2, h3
+   font-family: 'Oswald', sans-serif
+
+.container // container max width
+  @include media_min($_min_width: $nokia)
+    max-width: 100%
+    h1
+      font-size: 42px
+  @include media_min($_min_width: $phone)
+    max-width: 100%
+    margin: 0 15px
+  @include media_min($_min_width: $tablet)
+    max-width: 750px
+    h1
+      font-size: 42px
+  @include media_min($_min_width: $notebook)
+    max-width: 960px
+  @include media_min($_min_width: $desktop)
+    max-width: 1140px
+  @include media_min($_min_width: $projector)
+    max-width: 1300px
+
+.navbar // top-navbar-related
+  background-color: $brand-minor
+  z-index: 999 // on top of overlay
+  @include media_min($_min_width: 0)
+    &:not(.collapsed)
+      align-content: flex-start // top align items for mobiles
+  @include media_min($_min_width: $notebook)
+      align-content: center
+  .navbar-toggler // hamburger
+    border-color: $brand-minor  //a[aria-expanded="true"] background-color: #42DCA3 //  .navbar-toggler-icon //hamburger icon
+    height: 32px
+    width: 32px
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")
+    transition: 300ms ease
+    &:not(.collapsed)
+      background-image: url('../img/close-hamburger-menu.png')
+      background-repeat: no-repeat
+      background-position: center center
+      transition: 300ms ease
+  a.navbar-brand // navbar brand text + text under it
+    display: inline-block
+    margin: 0
+    .container
+      padding: 0
+    span
+      font-family: 'Oswald', sans-serif
+      &.paspartoo-brand  // text under the brand
+        font-size: 7px
+        display: block
+        color: $white
+  .navbar-right // call button + ask a question
+    .call_button // call button
+      color: $white
+      &:before
+        @include media_min($_min_width: $nokia)  // phone icon
+          content: "\f098"
+          font-family: FontAwesome
+          font-size: xx-large
+        @include media_min($_min_width: $notebook) // nothing
+          content: " "
+        @include media_min($_min_width: $projector) // call now added
+          content: "Call Now: "
+          font-size: medium
+      a
+        color: $white
+    .form_modal_button // ask a question
+      color: $white
+      background-color: $brand-orange
+      padding: 0.25rem
+      margin-left: 0.25rem
+      border-radius: 7px
+      align-self: center
+      font-family: Oswald, sans-serif
+      font-weight: 400
+      @include media_min($_min_width: $tablet)
+        margin-left: 2rem
+        padding: 0.5rem 1.5rem
+  .nav-link  // navbar menu elements
+    color: $white
+    text-decoration: none
+    text-transform: uppercase
+  .navbar-nav
+    @include media_min($_min_width: 0) // mobile: white on brand minor
+      padding-left: 15px
+    @include media_min($_min_width: $tablet)
+      padding-left: 0px
+  .dropdown-menu // natural foods dropdown
+    transition: 300ms ease
+    @include media_min($_min_width: 0) // mobile: white on brand minor
+      color: $white
+      background-color: $brand-minor
+      width: 90%
+    @include media_min($_min_width: $notebook) // notebook+: brand minor on brand-light
+      background-color: $brand-light
+  .dropdown-item // inside dropdown
+    @include media_min($_min_width: 0)// mobile: white on brand minor
+      color: $white
+      background-color: $brand-minor
+    @include media_min($_min_width: $notebook)
+      color: $brand-minor
+      background-color: $brand-light // notebook+: brand minor on brand-light
+      &:active  // notebook::active+: brand orange on brand-light
+        color: $brand-orange
+  .overlay
+    background-color: #000
+    opacity: 0.8
+    z-index: -777 // below hamburger meanu
+    position: fixed
+    display: none
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    cursor: pointer

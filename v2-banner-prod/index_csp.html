@@ -6,16 +6,22 @@
 <!-- <script src="https://app.secureprivacy.ai/script/659298b52518df3320c91e7c.js"></script> -->
 
 <meta http-equiv="Content-Security-Policy" content="
-  script-src  'self' https://app.secureprivacy.ai https://api-prod.secureprivacy.ai https://cmp.secureprivacy.ai https://use.fontawesome.com https://fonts.googleapis.com https://code.jquery.com;
-  connect-src 'self' https://api-prod.secureprivacy.ai;
-  img-src     'self' https://cmp.secureprivacy.ai;
-  default-src 'self'
-">   
+  default-src 'self';
+  script-src 'self' https://app.secureprivacy.ai https://api-prod.secureprivacy.ai https://cmp.secureprivacy.ai https://code.jquery.com https://use.fontawesome.com;
+  script-src-attr 'none';
+  connect-src 'self' https://api-prod.secureprivacy.ai https://app.secureprivacy.ai https://cmp.secureprivacy.ai;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com data:;
+  img-src 'self' data: https://cmp.secureprivacy.ai;
+  frame-src 'self';
+  object-src 'none';
+  base-uri 'self';
+">
    
    <script src="https://app.secureprivacy.ai/script/65401a848143b1304ce74af4.js"></script>
 
-   <script defer src="https://app.secureprivacy.ai/inline-replace.js?v=Math.random()"></script>
-   
+   <script defer src="https://app.secureprivacy.ai/inline-replace.js?v=2026-03-17-1"></script>
+  
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

@@ -21,7 +21,8 @@
     mount: params.get("mount") || "now",
     listen: params.get("listen") || "early",
     keep: params.get("keep") === "1",
-    label: params.get("label") || "Your Privacy Choices"
+    label: params.get("label") || "Your Privacy Choices",
+    mock: params.get("mock") === "1"
   };
 
   var t0 = Date.now();
@@ -57,6 +58,73 @@
     }
   } catch (e) {
     add("error", "localStorage unavailable: " + e.message);
+  }
+
+  // ---------------------------------------------------------------------
+  // 1b. Optional mock (mock=1): reshape API responses in this page only, to
+  //     mirror the reported payloads when the test domain is configured
+  //     differently. The CMP script itself runs unmodified.
+  //       template (any location): widgetText "Privacy", widgetType "Link"
+  //       template (US):           no banner layout, Implicit consent
+  //       widget (US):             204 No Content
+  //       widget (non-US):         Link widget, label below, shown on all pages
+  //     US template/preference center requests are sent as PL so the test
+  //     domain returns a real template to reshape.
+  // ---------------------------------------------------------------------
+  var MOCK_WIDGET_LABEL = "Your Privacy Choices ";
+  if (S.mock) {
+    var origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function (method, url) {
+      var args = Array.prototype.slice.call(arguments);
+      var m = typeof url === "string" &&
+        url.match(/\/api\/banner\/v2\/(template|widget|preferenceCenter)\/[^?]+\?(?:.*&)?Location=([^&]*)/);
+      if (m) {
+        var info = { ep: m[1], loc: decodeURIComponent(m[2]) };
+        info.isUS = /^US(-|$)/i.test(info.loc);
+        if (info.isUS && info.ep !== "widget") args[1] = url.replace(/([?&]Location=)[^&]*/, "$1PL");
+        var xhr = this;
+        // readystatechange (state 4) fires before the load event the CMP listens to.
+        this.addEventListener("readystatechange", function () {
+          if (xhr.readyState === 4) reshape(xhr, info);
+        });
+      }
+      return origOpen.apply(this, args);
+    };
+  }
+
+  function reshape(xhr, info) {
+    var status = xhr.status, body = xhr.responseText, note;
+    if (info.ep === "widget" && info.isUS) {
+      status = 204; body = ""; note = "widget " + info.loc + " -> 204";
+    } else if (status === 200) {
+      try {
+        var j = JSON.parse(body);
+        if (info.ep === "template") {
+          j.widgetText = "Privacy";
+          j.widgetType = "Link";
+          if (info.isUS && j.template) { j.template.Layout = ""; j.template.ConsentType = "Implicit"; }
+          note = "template " + info.loc + " -> widgetText Privacy/Link" + (info.isUS ? ", no banner, Implicit" : "");
+        } else if (info.ep === "widget" && j.template) {
+          j.WidgetView = {};
+          j.template.Settings = j.template.Settings || {};
+          j.template.Settings.Type = "Link";
+          j.template.Translation = j.template.Translation || {};
+          j.template.Translation.Text = MOCK_WIDGET_LABEL;
+          note = "widget " + info.loc + " -> Link \"" + MOCK_WIDGET_LABEL + "\"";
+        } else {
+          note = info.ep + " " + info.loc + " (served as PL)";
+        }
+        body = JSON.stringify(j);
+      } catch (e) {
+        note = info.ep + " " + info.loc + " not JSON, left as is";
+      }
+    } else {
+      note = info.ep + " " + info.loc + " status " + status + ", left as is";
+    }
+    Object.defineProperty(xhr, "status", { get: function () { return status; } });
+    Object.defineProperty(xhr, "responseText", { get: function () { return body; } });
+    Object.defineProperty(xhr, "response", { get: function () { return body; } });
+    add("mock", note);
   }
 
   // ---------------------------------------------------------------------
@@ -194,7 +262,7 @@
     try { dyn = JSON.parse(localStorage.getItem("sp_dynamic") || "null"); } catch (e) {}
     var text = target ? target.textContent.trim() : "";
     return {
-      scenario: S.mode + " | geo=" + S.geo + " | mount=" + S.mount + " | listen=" + S.listen + (S.keep ? " | keep" : ""),
+      scenario: S.mode + " | geo=" + S.geo + " | mount=" + S.mount + " | listen=" + S.listen + (S.keep ? " | keep" : "") + (S.mock ? " | mock" : ""),
       spLoaded: !!sp,
       spInitFired: !!S.spInitFired,
       location: sp ? (sp.location === undefined ? "(unset)" : sp.location) : "(no sp)",
@@ -218,5 +286,5 @@
   }
   S.escapeHTML = escapeHTML;
 
-  add("start", "harness ready: " + S.mode + ", geo=" + S.geo + ", mount=" + S.mount + ", listen=" + S.listen);
+  add("start", "harness ready: " + S.mode + ", geo=" + S.geo + ", mount=" + S.mount + ", listen=" + S.listen + (S.mock ? ", mock" : ""));
 })();

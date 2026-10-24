@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>GoVegan - Widget geo test</title>
+
+    <!-- 1. Test harness: must run before the CMP script (storage seeding + snippet under test). -->
+    <script src="harness.js"></script>
+
+    <!-- 2. CMP script, exactly as a site would embed it. -->
+    <script src="https://app.secureprivacy.ai/script/65401a848143b1304ce74af4.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../v2-banner/vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="../v2-banner/vendors/font-awesome.min.css">
+    <link rel="stylesheet" href="../v2-banner/css/styles.min.css">
+
+    <style>
+        .geo-panel {
+            position: fixed; top: 12px; right: 12px; z-index: 2147483000;
+            width: 380px; max-height: calc(100vh - 24px); overflow: auto;
+            background: #ffffff; color: #1b1f24; border: 1px solid #d0d7de; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+            font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        .geo-panel--collapsed > :not(.geo-panel__head) { display: none; }
+        .geo-panel__head { display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 10px; background: #0d1b3d; color: #fff; border-radius: 8px 8px 0 0; }
+        .geo-panel__head button { background: none; border: 0; color: #fff; cursor: pointer; font: inherit; }
+        .geo-panel section { padding: 8px 10px; border-top: 1px solid #eaeef2; }
+        .geo-panel h3 { font: 600 11px/1.2 inherit; text-transform: uppercase; letter-spacing: .06em;
+            color: #57606a; margin: 0 0 6px; }
+        .geo-row { display: grid; grid-template-columns: 120px 1fr; gap: 8px; padding: 2px 0; }
+        .geo-row > span:first-child { color: #57606a; }
+        .geo-wrap { word-break: break-all; white-space: pre-wrap; }
+        .geo-yes { color: #1a7f37; } .geo-no { color: #cf222e; }
+        .geo-log { list-style: none; margin: 0; padding: 0; }
+        .geo-log__item { display: grid; grid-template-columns: 48px 92px 1fr; gap: 6px; padding: 1px 0; }
+        .geo-log__t { color: #8c959f; } .geo-log__k { color: #0e7a47; }
+        .geo-log__item--error .geo-log__k, .geo-log__item--consoleerror .geo-log__k { color: #cf222e; }
+        .geo-log__d { word-break: break-all; }
+        .geo-links { margin: 0; padding-left: 16px; }
+        .geo-links li { margin: 2px 0; }
+        .geo-btn { font: inherit; padding: 4px 8px; margin-right: 6px; border: 1px solid #d0d7de;
+            border-radius: 4px; background: #f6f8fa; cursor: pointer; }
+        .privacy-slot-wrap { margin-top: 12px; }
+        .privacy-slot-wrap a, .privacy-slot-wrap span { color: inherit; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-between navbar-row">
+            <div class="col-auto navbar-left">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="#">
+                        <div class="navbar-brand__wrap">
+                            <span class="navbar-brand__wrap__go">GO</span>
+                            <span class="navbar-brand__wrap__vegan">VEGAN</span>
+                            <span class="navbar-brand__wrap__paspartoo">Paspartoo Education Project</span>
+                        </div>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row hero-content">
+            <div class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="../v2-banner/img/background_03.webp" alt="Vegan snacks on a table">
+                        <div class="carousel-caption">
+                            <h1>Widget geo test</h1>
+                            <h4>Hyperlink widget visibility by visitor location</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer-bar">
+            <div class="vegan-container">
+                <div class="row footer-main justify-content-between align-items-start">
+                    <div class="col-auto footer-main__brand">
+                        <a class="navbar-brand" href="#">
+                            <div class="navbar-brand__wrap">
+                                <span class="navbar-brand__wrap__go">GO</span>
+                                <span class="navbar-brand__wrap__vegan">VEGAN</span>
+                                <span class="navbar-brand__wrap__paspartoo">Paspartoo Education Project</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-auto footer-main__menu">
+                        <li class="footer-navigation-menu__element">
+                            <a href="#" class="footer-navigation-menu__link">Food</a>
+                        </li>
+                        <li class="footer-navigation-menu__element">
+                            <a href="#" class="footer-navigation-menu__link">Lifestyle</a>
+                        </li>
+                        <li class="footer-navigation-menu__element privacy-slot-wrap">
+                            <!-- The privacy link under test is rendered here by the harness. -->
+                            <span id="privacy-slot" class="footer-navigation-menu__link"></span>
+                            <script>window.__geoTest.renderSlotNow();</script>
+                        </li>
+                    </div>
+                </div>
+                <div class="row copyright-bar justify-content-between">
+                    <div class="copyright">Copyright &copy; GoVegan, llc. Test page.</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <aside id="geo-panel" class="geo-panel" aria-label="Test panel">
+        <div class="geo-panel__head">
+            <strong>Widget geo test</strong>
+            <button type="button" data-toggle>hide / show</button>
+        </div>
+        <section>
+            <h3>Live state</h3>
+            <div data-state></div>
+        </section>
+        <section>
+            <h3>Config for this location</h3>
+            <button type="button" class="geo-btn" data-check-config>Check config</button>
+            <button type="button" class="geo-btn" data-reset>Reset storage</button>
+            <div data-config style="margin-top:6px"></div>
+        </section>
+        <section>
+            <h3>Event log</h3>
+            <ul class="geo-log" data-log></ul>
+        </section>
+        <section>
+            <h3>Scenarios</h3>
+            <ul class="geo-links">
+                <li><a href="?mode=baseline&geo=real">Baseline, real location</a></li>
+                <li><a href="?mode=baseline&geo=US-NY">Baseline, US-NY</a></li>
+                <li><a href="?mode=v1&geo=real">v1, real location</a></li>
+                <li><a href="?mode=v1&geo=US-NY">v1, US-NY</a></li>
+                <li><a href="?mode=v1&geo=real&mount=late">v1, real, late mount</a></li>
+                <li><a href="?mode=v1&geo=real&mount=rerender">v1, real, re-render</a></li>
+                <li><a href="?mode=v1&geo=real&listen=late">v1, real, late listener</a></li>
+                <li><a href="?mode=v2&geo=real">v2, real location</a></li>
+                <li><a href="?mode=v2&geo=US-NY">v2, US-NY</a></li>
+                <li><a href="?mode=v2&geo=real&mount=late">v2, real, late mount</a></li>
+                <li><a href="?mode=v2&geo=real&mount=rerender">v2, real, re-render</a></li>
+                <li><a href="?mode=v2&geo=real&listen=late">v2, real, late listener</a></li>
+                <li><a href="?mode=v2&geo=US-NY&listen=late">v2, US-NY, late listener</a></li>
+            </ul>
+            <p style="margin:6px 0 0;color:#57606a">Add <code>&amp;keep=1</code> to reload as a returning visitor (stored consent and location kept).</p>
+        </section>
+    </aside>
+
+    <script src="panel.js"></script>
+</body>
+
+</html>

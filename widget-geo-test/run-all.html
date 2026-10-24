@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Widget geo test runner</title>
+    <style>
+        :root { --ok: #1a7f37; --bad: #cf222e; --warn: #9a6700; --muted: #57606a; --line: #d0d7de; }
+        body { margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1b1f24; background: #fafbf8; }
+        header { padding: 16px 20px; background: #0d1b3d; color: #fff; }
+        header h1 { margin: 0 0 4px; font-size: 18px; }
+        header p { margin: 0; color: #c9d1d9; font-size: 13px; }
+        main { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 16px; padding: 16px 20px; }
+        @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+        .bar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: #fff; cursor: pointer; }
+        button.primary { background: #0e7a47; color: #fff; border-color: #0e7a47; }
+        button:disabled { opacity: .5; cursor: default; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); }
+        th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eaeef2; vertical-align: top; font-size: 13px; }
+        th { background: #f6f8fa; font-weight: 600; }
+        td code { font-size: 12px; }
+        .group td { background: #f6f8fa; font-weight: 600; color: var(--muted); }
+        .st { font-weight: 700; white-space: nowrap; }
+        .st.pass { color: var(--ok); } .st.fail { color: var(--bad); } .st.run { color: var(--warn); }
+        .known { display: inline-block; margin-top: 2px; font-size: 11px; color: var(--warn); }
+        .detail { color: var(--muted); font-size: 12px; word-break: break-word; }
+        iframe { width: 100%; height: 560px; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+        .summary { font-weight: 600; }
+        textarea { width: 100%; height: 160px; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; margin-top: 8px; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Widget geo test runner</h1>
+        <p>Runs every case from TEST-CASES.md against <code>index.html</code> in the frame on the right and checks the result against the correct behavior.
+            Cases marked "known failing" fail until the product fix ships. BUG-03 saves one consent record on the test domain.</p>
+    </header>
+    <main>
+        <section>
+            <div class="bar">
+                <button class="primary" id="run-all">Run all</button>
+                <button id="copy">Copy results as Markdown</button>
+                <span class="summary" id="summary"></span>
+            </div>
+            <table>
+                <thead><tr><th>ID</th><th>Scenario</th><th>Expected (correct behavior)</th><th>Result</th><th></th></tr></thead>
+                <tbody id="rows"></tbody>
+            </table>
+            <textarea id="md" readonly hidden></textarea>
+        </section>
+        <section>
+            <iframe id="frame" title="Test page under test"></iframe>
+        </section>
+    </main>
+
+    <script>
+    (function () {
+        "use strict";
+        var V3 = "snippet=customer-snippet-v3.html";
+        var V2CLASS = "snippet=customer-snippet.html";
+        // expect keys map to fields of window.__geoTest.snapshot() in the test page.
+        var CASES = [
+            { group: "Bug reproduction (CMP embed snippet, customer-shaped API responses)" },
+            { id: "BUG-01", title: "International visitor, no saved choice", q: "mode=baseline&geo=PL&mock=1",
+              expect: { linkVisible: true, linkText: "Your Privacy Choices" }, known: "Shows default \"Privacy\"" },
+            { id: "BUG-02", title: "US visitor (widget disabled for US), no saved choice", q: "mode=baseline&geo=US-NY&mock=1",
+              expect: { linkVisible: false }, known: "\"Privacy\" link shown" },
+            { id: "BUG-03", title: "International visitor accepts; same page", q: "mode=baseline&geo=PL&mock=1", action: "accept",
+              expect: { consentSaved: true, linkText: "Your Privacy Choices" }, known: "Label stays \"Privacy\" until reload" },
+            { id: "BUG-04", title: "Same visitor, next page load (keeps BUG-03 storage)", q: "mode=baseline&geo=PL&mock=1&keep=1",
+              expect: { linkVisible: true, linkText: "Your Privacy Choices" } },
+
+            { group: "Workaround v3 (verbatim customer snippet, data attribute)" },
+            { id: "WA-01", title: "International, real domain config", q: "mode=customer&" + V3 + "&geo=PL",
+              expect: { linkVisible: true, linkText: "Your Privacy Choices" } },
+            { id: "WA-02", title: "US, real domain config", q: "mode=customer&" + V3 + "&geo=US-NY",
+              expect: { linkVisible: false } },
+            { id: "WA-03", title: "International, customer-shaped responses", q: "mode=customer&" + V3 + "&geo=PL&mock=1",
+              expect: { linkVisible: true, linkText: "Your Privacy Choices" } },
+            { id: "WA-04", title: "US, customer-shaped responses", q: "mode=customer&" + V3 + "&geo=US-NY&mock=1",
+              expect: { linkVisible: false } },
+            { id: "WA-05", title: "Footer mounts 3 s after load (SPA)", q: "mode=customer&" + V3 + "&geo=PL&mock=1&mount=late",
+              expect: { linkVisible: true } },
+            { id: "WA-06", title: "Footer re-rendered at 4 s (route change)", q: "mode=customer&" + V3 + "&geo=PL&mock=1&mount=rerender",
+              expect: { linkVisible: true } },
+            { id: "WA-07", title: "Snippet loaded 6 s after init (tag manager), international", q: "mode=customer&" + V3 + "&geo=PL&mock=1&listen=late",
+              wait: 9500, expect: { linkVisible: true } },
+            { id: "WA-08", title: "Snippet loaded 6 s after init (tag manager), US", q: "mode=customer&" + V3 + "&geo=US-NY&mock=1&listen=late",
+              wait: 9500, expect: { linkVisible: false } },
+            { id: "WA-09", title: "App rewrites <html class> at 5 s", q: "mode=customer&" + V3 + "&geo=PL&mock=1&htmlreset=1",
+              expect: { linkVisible: true } },
+            { id: "WA-10", title: "Location unknown (no location in cached lookup)", q: "mode=customer&" + V3 + "&geo=none&mock=1",
+              expect: { linkVisible: true } },
+            { id: "WA-11", title: "Click opens the preference center", q: "mode=customer&" + V3 + "&geo=PL&mock=1", action: "click",
+              expect: { prefCenterOpen: true } },
+            { id: "WA-12", title: "Old embed span left in place, US", q: "mode=customer&" + V3 + "&geo=US-NY&mock=1&keepspan=1",
+              expect: { linkVisible: false, spanVisible: false }, known: "Old span still shows \"Privacy\": remove it" },
+
+            { group: "Rejected variants (kept as regression evidence)" },
+            { id: "REJ-01", title: "Class-based snippet, app rewrites <html class>", q: "mode=customer&" + V2CLASS + "&geo=PL&mock=1&htmlreset=1",
+              expect: { linkVisible: true }, known: "Link disappears" },
+            { id: "REJ-02", title: "First workaround (v1), footer mounts late", q: "mode=v1&geo=PL&mock=1&mount=late",
+              expect: { linkVisible: true }, known: "No link for international visitors" },
+            { id: "REJ-03", title: "First workaround (v1), footer re-rendered", q: "mode=v1&geo=PL&mock=1&mount=rerender",
+              expect: { linkVisible: true }, known: "Link lost after re-render" },
+            { id: "REJ-04", title: "First workaround (v1), loaded after init", q: "mode=v1&geo=PL&mock=1&listen=late",
+              wait: 9500, expect: { linkVisible: true }, known: "No link for international visitors" }
+        ];
+
+        var rows = document.getElementById("rows");
+        var frame = document.getElementById("frame");
+        var results = {};
+
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function fmtExpect(e) { return Object.keys(e).map(function (k) { return k + " = " + JSON.stringify(e[k]); }).join("<br>"); }
+
+        CASES.forEach(function (c) {
+            var tr = document.createElement("tr");
+            if (c.group) { tr.className = "group"; tr.innerHTML = '<td colspan="5">' + esc(c.group) + "</td>"; rows.appendChild(tr); return; }
+            tr.id = "row-" + c.id;
+            tr.innerHTML = "<td><b>" + c.id + "</b></td>" +
+                "<td>" + esc(c.title) + '<div class="detail"><a href="index.html?' + c.q + '" target="_blank" rel="noopener">?' + esc(c.q) + "</a>" +
+                (c.action ? " + " + c.action : "") + "</div></td>" +
+                "<td><code>" + fmtExpect(c.expect) + "</code>" + (c.known ? '<div class="known">Known failing until fix: ' + esc(c.known) + "</div>" : "") + "</td>" +
+                '<td class="res">-</td><td><button data-run="' + c.id + '">Run</button></td>';
+            rows.appendChild(tr);
+        });
+
+        function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+        function loadFrame(q) {
+            return new Promise(function (resolve) {
+                frame.onload = function () { resolve(); };
+                frame.src = "index.html?" + q + "&_run=" + Date.now();
+            });
+        }
+
+        async function runCase(c) {
+            var cell = document.querySelector("#row-" + c.id + " .res");
+            cell.innerHTML = '<span class="st run">running...</span>';
+            await loadFrame(c.q);
+            await sleep(c.wait || 7000);
+            var w = frame.contentWindow;
+            try {
+                if (c.action === "accept") { await w.sp.saveAllConsents("acceptAll", "cb"); await sleep(2500); }
+                if (c.action === "click") { w.document.querySelector(".privacy-choices-link").click(); await sleep(1500); }
+            } catch (e) { /* recorded below through the snapshot */ }
+            var s = w.__geoTest ? w.__geoTest.snapshot() : null;
+            var failures = [];
+            if (!s) failures.push("test page did not load");
+            else Object.keys(c.expect).forEach(function (k) {
+                if (s[k] !== c.expect[k]) failures.push(k + " = " + JSON.stringify(s[k]));
+            });
+            var pass = failures.length === 0;
+            results[c.id] = { pass: pass, failures: failures, snap: s };
+            cell.innerHTML = '<span class="st ' + (pass ? "pass" : "fail") + '">' + (pass ? "PASS" : "FAIL") + "</span>" +
+                (s ? '<div class="detail">location ' + esc(s.location) + ", link " + (s.linkVisible ? "visible" : "hidden") +
+                    (s.linkText ? ' "' + esc(s.linkText) + '"' : "") + (failures.length ? "<br>got " + esc(failures.join(", ")) : "") + "</div>" : "");
+            renderSummary();
+        }
+
+        function renderSummary() {
+            var ids = Object.keys(results);
+            var passed = ids.filter(function (id) { return results[id].pass; }).length;
+            var knownFail = ids.filter(function (id) {
+                var c = CASES.filter(function (x) { return x.id === id; })[0];
+                return !results[id].pass && c && c.known;
+            }).length;
+            var unexpected = ids.length - passed - knownFail;
+            document.getElementById("summary").textContent = passed + " passed, " + knownFail + " known failing, " +
+                unexpected + " unexpected failures (" + ids.length + " run)";
+        }
+
+        document.getElementById("run-all").addEventListener("click", async function () {
+            var btns = document.querySelectorAll("button");
+            btns.forEach(function (b) { b.disabled = true; });
+            results = {};
+            for (var i = 0; i < CASES.length; i++) if (CASES[i].id) await runCase(CASES[i]);
+            btns.forEach(function (b) { b.disabled = false; });
+            window.__runnerDone = true;
+        });
+
+        rows.addEventListener("click", function (e) {
+            var id = e.target.getAttribute && e.target.getAttribute("data-run");
+            if (!id) return;
+            runCase(CASES.filter(function (c) { return c.id === id; })[0]);
+        });
+
+        document.getElementById("copy").addEventListener("click", function () {
+            var lines = ["| ID | Scenario | Result | Notes |", "|---|---|---|---|"];
+            CASES.forEach(function (c) {
+                if (!c.id) return;
+                var r = results[c.id];
+                var res = !r ? "not run" : r.pass ? "PASS" : (c.known ? "FAIL (known)" : "FAIL");
+                lines.push("| " + c.id + " | " + c.title + " | " + res + " | " + (r && r.failures.length ? r.failures.join(", ") : "") + " |");
+            });
+            var ta = document.getElementById("md");
+            ta.hidden = false;
+            ta.value = "Run " + new Date().toISOString() + " (" + navigator.userAgent + ")\n\n" + lines.join("\n");
+            ta.select();
+            try { navigator.clipboard.writeText(ta.value); } catch (e) {}
+        });
+
+        window.__runner = { CASES: CASES, results: results, get all() { return results; } };
+    })();
+    </script>
+</body>
+
+</html>

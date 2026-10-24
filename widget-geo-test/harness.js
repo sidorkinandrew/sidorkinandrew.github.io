@@ -22,7 +22,10 @@
     listen: params.get("listen") || "early",
     keep: params.get("keep") === "1",
     label: params.get("label") || "Your Privacy Choices",
-    mock: params.get("mock") === "1"
+    mock: params.get("mock") === "1",
+    snippet: params.get("snippet") || "customer-snippet.html",
+    keepspan: params.get("keepspan") === "1",
+    htmlreset: params.get("htmlreset") === "1"
   };
 
   var t0 = Date.now();
@@ -46,7 +49,10 @@
         // Same shape the CMP script caches after its /dynamic call. While this
         // cache is fresh the script skips the call and uses this location.
         localStorage.setItem("sp_dynamic", JSON.stringify({
-          data: { location: S.geo, subConsents: [], isConsentRecordingAllowed: true, g: false, c: false },
+          // geo=none: cached result without a location (failed IP lookup).
+          data: S.geo === "none"
+            ? { subConsents: [], isConsentRecordingAllowed: true, g: false, c: false }
+            : { location: S.geo, subConsents: [], isConsentRecordingAllowed: true, g: false, c: false },
           timestamp: Date.now(),
           saved: false,
           localOnly: false
@@ -208,6 +214,47 @@
     add("snippet", "v2 installed (" + S.listen + ")");
   }
 
+  // customer: the exact block sent to the customer, loaded verbatim from a file.
+  //   listen=early -> written into <head> while parsing (as if pasted there)
+  //   listen=late  -> inserted 6 s after load (as a tag manager would)
+  function loadCustomerSnippet() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", S.snippet + "?_=" + Date.now(), false);
+    xhr.send();
+    if (xhr.status !== 200) { add("error", "could not load " + S.snippet); return null; }
+    return xhr.responseText;
+  }
+  function insertSnippetLate(text) {
+    var tpl = document.createElement("template");
+    tpl.innerHTML = text;
+    Array.prototype.forEach.call(tpl.content.children, function (node) {
+      if (node.tagName === "SCRIPT") {
+        var sc = document.createElement("script");
+        sc.textContent = node.textContent;
+        document.head.appendChild(sc);
+      } else {
+        document.head.appendChild(node.cloneNode(true));
+      }
+    });
+  }
+  if (S.mode === "customer") {
+    var snippetText = loadCustomerSnippet();
+    if (snippetText) {
+      if (S.listen === "late") {
+        setTimeout(function () { insertSnippetLate(snippetText); add("snippet", S.snippet + " inserted late"); }, 6000);
+      } else {
+        document.write(snippetText);
+        add("snippet", S.snippet + " written into <head>");
+      }
+    }
+  }
+  if (S.htmlreset) {
+    setTimeout(function () {
+      document.documentElement.className = "app-theme";
+      add("html", "app rewrote <html class> to \"app-theme\"");
+    }, 5000);
+  }
+
   var installer = S.mode === "v1" ? installV1 : S.mode === "v2" ? installV2 : null;
   if (installer) {
     if (S.listen === "late") setTimeout(installer, 6000);
@@ -220,6 +267,11 @@
   function slotHTML() {
     if (S.mode === "v2") {
       return '<a href="#" class="privacy-choices-link">' + escapeHTML(S.label) + "</a>";
+    }
+    if (S.mode === "customer") {
+      // The customer's footer markup from the reply, optionally with the old span left in.
+      return '<a href="#" class="privacy-choices-link">Your Privacy Choices</a>' +
+        (S.keepspan ? ' <span id="sp-tb-embed-widget" onclick="window.parent.sp.openPreferenceCenter();"></span>' : "");
     }
     // The exact embed snippet from the CMP documentation.
     return '<span id="sp-tb-embed-widget" onclick="window.parent.sp.openPreferenceCenter();"></span>';
@@ -262,7 +314,8 @@
     try { dyn = JSON.parse(localStorage.getItem("sp_dynamic") || "null"); } catch (e) {}
     var text = target ? target.textContent.trim() : "";
     return {
-      scenario: S.mode + " | geo=" + S.geo + " | mount=" + S.mount + " | listen=" + S.listen + (S.keep ? " | keep" : "") + (S.mock ? " | mock" : ""),
+      scenario: S.mode + " | geo=" + S.geo + " | mount=" + S.mount + " | listen=" + S.listen + (S.keep ? " | keep" : "") + (S.mock ? " | mock" : "") +
+        (S.keepspan ? " | keepspan" : "") + (S.htmlreset ? " | htmlreset" : ""),
       spLoaded: !!sp,
       spInitFired: !!S.spInitFired,
       location: sp ? (sp.location === undefined ? "(unset)" : sp.location) : "(no sp)",
@@ -272,7 +325,11 @@
       linkInDom: !!target,
       linkVisible: isShown(target) && text.length > 0,
       linkText: text,
-      slotHTML: slot ? slot.innerHTML : "(no slot)"
+      slotHTML: slot ? slot.innerHTML : "(no slot)",
+      spanText: (function () { var sp2 = document.getElementById("sp-tb-embed-widget"); return sp2 ? sp2.textContent.trim() : null; })(),
+      spanVisible: isShown(document.getElementById("sp-tb-embed-widget")) && !!(document.getElementById("sp-tb-embed-widget") || {}).textContent,
+      htmlClass: document.documentElement.className,
+      prefCenterOpen: !!(document.getElementById("sp-preference-center") && document.getElementById("sp-preference-center").open)
     };
   };
 

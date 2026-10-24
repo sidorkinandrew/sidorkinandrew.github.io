@@ -8,7 +8,7 @@
     <title>GoVegan - Widget geo test</title>
 
     <!-- 1. Test harness: must run before the CMP script (storage seeding + snippet under test). -->
-    <script src="harness.js?v=3"></script>
+    <script src="harness.js?v=4"></script>
 
     <!-- 2. CMP script, exactly as a site would embed it. -->
     <script src="https://app.secureprivacy.ai/script/65401a848143b1304ce74af4.js"></script>
@@ -151,6 +151,20 @@
                 <li><a href="?mode=v2&geo=real&listen=late">v2, real, late listener</a></li>
                 <li><a href="?mode=v2&geo=US-NY&listen=late">v2, US-NY, late listener</a></li>
             </ul>
+            <h3 style="margin-top:10px">Customer snippet (verbatim)</h3>
+            <ul class="geo-links">
+                <li><a href="?mode=customer&geo=PL">PL, real config</a></li>
+                <li><a href="?mode=customer&geo=US-NY">US-NY, real config</a></li>
+                <li><a href="?mode=customer&geo=PL&mock=1">PL, mock</a></li>
+                <li><a href="?mode=customer&geo=US-NY&mock=1">US-NY, mock</a></li>
+                <li><a href="?mode=customer&geo=PL&mock=1&mount=late">PL, mock, late mount</a></li>
+                <li><a href="?mode=customer&geo=PL&mock=1&mount=rerender">PL, mock, re-render</a></li>
+                <li><a href="?mode=customer&geo=PL&mock=1&listen=late">PL, mock, loaded late</a></li>
+                <li><a href="?mode=customer&geo=US-NY&mock=1&listen=late">US-NY, mock, loaded late</a></li>
+                <li><a href="?mode=customer&geo=US-NY&mock=1&keepspan=1">US-NY, mock, old span left in</a></li>
+                <li><a href="?mode=customer&geo=PL&mock=1&htmlreset=1">PL, mock, app rewrites html class</a></li>
+                <li><a href="?mode=customer&geo=none&mock=1">No location, mock</a></li>
+            </ul>
             <h3 style="margin-top:10px">Mock (reported payload shape)</h3>
             <ul class="geo-links">
                 <li><a href="?mode=baseline&geo=PL&mock=1">Baseline, PL, mock</a></li>
@@ -170,7 +184,7 @@
         </section>
     </aside>
 
-    <script src="panel.js?v=2"></script>
+    <script src="panel.js?v=4"></script>
 </body>
 
 </html>

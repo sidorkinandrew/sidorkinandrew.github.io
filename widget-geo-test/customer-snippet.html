@@ -1,0 +1,22 @@
+<style>
+  .privacy-choices-link { display: none !important; }
+  html.show-privacy-choices .privacy-choices-link { display: inline !important; }
+</style>
+<script>
+(function () {
+  function decide() {
+    var loc = (window.sp && window.sp.location) || "";
+    if (/^US(-|$)/i.test(loc)) return; // US visitor: keep the link hidden
+    document.documentElement.classList.add("show-privacy-choices");
+  }
+  if (window.sp && typeof window.sp.location === "string") decide();
+  else window.addEventListener("sp_init", decide, { once: true });
+
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest && e.target.closest(".privacy-choices-link");
+    if (!link) return;
+    e.preventDefault();
+    if (window.sp && window.sp.openPreferenceCenter) window.sp.openPreferenceCenter();
+  });
+})();
+</script>

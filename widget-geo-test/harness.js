@@ -267,7 +267,8 @@
       spInitFired: !!S.spInitFired,
       location: sp ? (sp.location === undefined ? "(unset)" : sp.location) : "(no sp)",
       consentSaved: !!(dyn && dyn.saved),
-      bannerVisible: !!(sp && sp.cookieBannerVisible && sp.cookieBannerVisible()),
+      // sp.cookieBannerVisible() stays true after the banner closes, so read the dialog directly.
+      bannerVisible: !!(document.getElementById("main-cookie-banner") && document.getElementById("main-cookie-banner").open),
       linkInDom: !!target,
       linkVisible: isShown(target) && text.length > 0,
       linkText: text,

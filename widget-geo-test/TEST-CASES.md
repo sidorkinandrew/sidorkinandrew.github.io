@@ -42,15 +42,17 @@ widget endpoint and is geo-aware.
 |---|---|---|
 | `mode` | `baseline` (default), `customer`, `v1`, `v2` | `baseline` = CMP embed span `#sp-tb-embed-widget` only. `customer` = customer link + snippet file. `v1`/`v2` = earlier workaround drafts. |
 | `snippet` | file name | Snippet file for `mode=customer` (default `customer-snippet.html`). |
-| `geo` | `real` (default), `US-NY`, `PL`, `none`, any location code | `real` clears storage so the CMP geolocates normally. Any other value seeds `localStorage.sp_dynamic` with that location (the CMP then skips `/api/banner/dynamic`). `none` seeds a cached lookup with no location. |
+| `geo` | `real` (default), `US-NY`, `PL`, `none`, any location code | `real` clears storage so the CMP geolocates normally. Any other value seeds `localStorage["sp_dynamic:<domain id>"]` (and legacy `sp_dynamic`) with that location (the CMP then skips `/api/banner/dynamic`). `none` seeds a cached lookup with no location. |
 | `mock` | `1` | Reshapes API responses **in this page only** to the payload shape reported by the customer (template: `widgetText "Privacy"`, `widgetType "Link"`; US template: no banner, Implicit; US widget: `204`; other widget: Link, `"Your Privacy Choices "`). US template/preference-center requests are sent as `PL` so the test domain returns a template to reshape. The CMP script itself is unmodified. |
 | `mount` | `now` (default), `late`, `rerender` | `late` renders the footer link 3 s after load (SPA). `rerender` replaces it at 4 s (route change). |
 | `listen` | `early` (default), `late` | `late` loads the snippet 6 s after load, after `sp_init` (tag manager). |
+| `lang` | e.g. `pl`, `en-US,pl` | Overrides `navigator.language` / `navigator.languages` before the CMP loads (the CMP picks the template language from the browser). |
+| `domain` | domain ID | Storage namespace for `geo` seeding (default: the test domain). |
 | `keep` | `1` | Keep stored consent and location (returning visitor). Ignores `geo`. |
 | `keepspan` | `1` | `mode=customer`: also render the old `#sp-tb-embed-widget` span. |
 | `htmlreset` | `1` | At 5 s, overwrite `document.documentElement.className` (theme switchers, some frameworks). |
 
-`window.__geoTest.snapshot()` returns `location`, `spInitFired`, `consentSaved`, `bannerVisible`,
+`window.__geoTest.snapshot()` returns `location`, `language`, `spInitFired`, `consentSaved`, `bannerVisible`,
 `linkInDom`, `linkVisible`, `linkText`, `spanText`, `spanVisible`, `htmlClass`, `prefCenterOpen`.
 
 ## Test domain configuration
@@ -143,7 +145,7 @@ error responses, and purge on configuration save.
 
 ## QA notes
 
-- **Location is cached for 4 hours** in `localStorage.sp_dynamic`. Use a fresh private window per
+- **Location is cached for 4 hours** in `localStorage["sp_dynamic:<domain id>"]` (`sp_dynamic` in older builds). Use a fresh private window per
   location, or this page's "Reset storage" button. The test page shares storage with every other
   page on `sidorkinandrew.github.io`; reset when done.
 - **Never open the plain API URLs in a browser tab.** Add `&format=json` (a separate cache key).

@@ -25,8 +25,20 @@
     mock: params.get("mock") === "1",
     snippet: params.get("snippet") || "customer-snippet.html",
     keepspan: params.get("keepspan") === "1",
-    htmlreset: params.get("htmlreset") === "1"
+    htmlreset: params.get("htmlreset") === "1",
+    // Domain ID of the CMP script on index.html (storage keys are namespaced by it).
+    domain: params.get("domain") || "65401a848143b1304ce74af4",
+    // lang=pl or lang=en-US,pl : override the browser languages the CMP sees.
+    lang: params.get("lang")
   };
+
+  if (S.lang) {
+    var langs = S.lang.split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+    try {
+      Object.defineProperty(navigator, "language", { get: function () { return langs[0]; }, configurable: true });
+      Object.defineProperty(navigator, "languages", { get: function () { return langs.slice(); }, configurable: true });
+    } catch (e) { /* recorded below */ }
+  }
 
   var t0 = Date.now();
   var log = [];
@@ -48,7 +60,8 @@
       if (S.geo !== "real") {
         // Same shape the CMP script caches after its /dynamic call. While this
         // cache is fresh the script skips the call and uses this location.
-        localStorage.setItem("sp_dynamic", JSON.stringify({
+        // Current CMP builds read "sp_dynamic:<domain id>"; older builds read "sp_dynamic".
+        var seed = JSON.stringify({
           // geo=none: cached result without a location (failed IP lookup).
           data: S.geo === "none"
             ? { subConsents: [], isConsentRecordingAllowed: true, g: false, c: false }
@@ -56,7 +69,9 @@
           timestamp: Date.now(),
           saved: false,
           localOnly: false
-        }));
+        });
+        localStorage.setItem("sp_dynamic:" + S.domain, seed);
+        localStorage.setItem("sp_dynamic", seed);
       }
       add("storage", S.geo === "real" ? "cleared, real geolocation" : "cleared, seeded location " + S.geo);
     } else {
@@ -311,7 +326,7 @@
     var slot = document.getElementById("privacy-slot");
     var target = slot && (slot.querySelector(".privacy-choices-link") || slot.querySelector("#sp-tb-embed-widget"));
     var dyn = null;
-    try { dyn = JSON.parse(localStorage.getItem("sp_dynamic") || "null"); } catch (e) {}
+    try { dyn = JSON.parse(localStorage.getItem("sp_dynamic:" + S.domain) || localStorage.getItem("sp_dynamic") || "null"); } catch (e) {}
     var text = target ? target.textContent.trim() : "";
     return {
       scenario: S.mode + " | geo=" + S.geo + " | mount=" + S.mount + " | listen=" + S.listen + (S.keep ? " | keep" : "") + (S.mock ? " | mock" : "") +
@@ -319,6 +334,7 @@
       spLoaded: !!sp,
       spInitFired: !!S.spInitFired,
       location: sp ? (sp.location === undefined ? "(unset)" : sp.location) : "(no sp)",
+      language: sp ? sp.language : "(no sp)",
       consentSaved: !!(dyn && dyn.saved),
       // sp.cookieBannerVisible() stays true after the banner closes, so read the dialog directly.
       bannerVisible: !!(document.getElementById("main-cookie-banner") && document.getElementById("main-cookie-banner").open),
@@ -344,5 +360,6 @@
   }
   S.escapeHTML = escapeHTML;
 
+  if (S.lang) add("lang", "browser languages overridden: " + navigator.languages.join(", "));
   add("start", "harness ready: " + S.mode + ", geo=" + S.geo + ", mount=" + S.mount + ", listen=" + S.listen + (S.mock ? ", mock" : ""));
 })();
